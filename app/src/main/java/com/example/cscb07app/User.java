@@ -1,5 +1,5 @@
 package com.example.cscb07app;
-//hello 
+//hello my name is youngjae heo
 public class User {
 
     String username;
