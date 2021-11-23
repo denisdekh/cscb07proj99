@@ -30,8 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     public static final String PASSWORD_MESSAGE = "com.example.PASSWORD";
     public static final String USERTYPE_MESSAGE = "com.example.USERTYPE";
 
-    DatabaseReference ref_owners = FirebaseDatabase.getInstance().getReference("Owners");
-    DatabaseReference ref_customers = FirebaseDatabase.getInstance().getReference("Customers");
+    DatabaseReference ref_accounts = FirebaseDatabase.getInstance().getReference("Account");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,44 +52,32 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void Register(String username, String password, String usertype) {
-        if (usertype.equals("Owner")) {
-            ref_owners.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    /* If the customer username does not exist in the database */
-                    if (!snapshot.child(username).exists()) {
+        ref_accounts.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot ref_owners = snapshot.child("Owner");
+                DataSnapshot ref_customers = snapshot.child("Customer");
+                /* Ensure the username does not already exist under customer and owner */
+                if (!ref_owners.child(username).exists() && !ref_owners.child(username).exists()) {
+                    /* If the user is registering an owner account */
+                    if (usertype.equals("Owner")) {
                         Owner current = new Owner(username, password);
-                        ref_owners.child(username).setValue(current);
-                        Toast.makeText(RegisterActivity.this, "Your account has been created", Toast.LENGTH_SHORT).show();
+                        ref_accounts.child("Owner").child(username).setValue(current);
+                    /* If the user is registering a customer account */
                     } else {
-                        Toast.makeText(RegisterActivity.this, "Username does not exist", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        } else {
-            ref_customers.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    /* If the customer username does not exist in the database */
-                    if (!snapshot.child(username).exists()) {
                         Customer current = new Customer(username, password);
-                        ref_customers.child(username).setValue(current);
-                        Toast.makeText(RegisterActivity.this, "Your account has been created", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "Username does not exist", Toast.LENGTH_SHORT).show();
+                        ref_accounts.child("Customer").child(username).setValue(current);
                     }
+                    Toast.makeText(RegisterActivity.this, "Your account has been created", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Username does not exist", Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
-        }
+            }
+        });
     }
 }
