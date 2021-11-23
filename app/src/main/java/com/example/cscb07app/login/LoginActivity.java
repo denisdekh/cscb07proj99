@@ -30,8 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final String PASSWORD_MESSAGE = "com.example.PASSWORD";
     public static final String USERTYPE_MESSAGE = "com.example.USERTYPE";
 
-    DatabaseReference ref_owners = FirebaseDatabase.getInstance().getReference("Owners");
-    DatabaseReference ref_customers = FirebaseDatabase.getInstance().getReference("Customers");
+    DatabaseReference ref_accounts = FirebaseDatabase.getInstance().getReference("Account");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,58 +46,43 @@ public class LoginActivity extends AppCompatActivity {
     public void SignInButton(View view) {
         EditText usernameTextEdit = findViewById(R.id.username);
         EditText passwordTextEdit = findViewById(R.id.password);
-        Spinner userTypeEdit = findViewById(R.id.user);
         
         signIn(usernameTextEdit.getText().toString(),
-                passwordTextEdit.getText().toString(),
-                userTypeEdit.getSelectedItem().toString());
+                passwordTextEdit.getText().toString());
     }
 
     /* Login procedure depending on whether it is an owner or customer.  */
-    private void signIn(String username, String password, String usertype) {
-        if (usertype.equals("Owner")) {
-            ref_owners.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.child(username).exists()) {
-                        Owner current = snapshot.child(username).getValue(Owner.class);
-                        if (current.getPassword().equals(password)) {
-                            Toast.makeText(LoginActivity.this, "You have logged in", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
-                        }
+    private void signIn(String username, String password) {
+        ref_accounts.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot owners_ref = snapshot.child("Owner");
+                DataSnapshot customers_ref = snapshot.child("Customer");
+                /* Checks if username exists under Owner in database */
+                if (owners_ref.child(username).exists()) {
+                    Owner current = owners_ref.child(username).getValue(Owner.class);
+                    if (current.getPassword().equals(password)) {
+                        Toast.makeText(LoginActivity.this, "You have logged in", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Username does not exist", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        } else {
-            ref_customers.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.child(username).exists()) {
-                        Customer current = snapshot.child(username).getValue(Customer.class);
-                        if (current.getPassword().equals(password)) {
-                            Toast.makeText(LoginActivity.this, "You have logged in", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
-                        }
+                /* Checks if username exists under Customer in database */
+                } else if (customers_ref.child(username).exists()) {
+                    Customer current = customers_ref.child(username).getValue(Customer.class);
+                    if (current.getPassword().equals(password)) {
+                        Toast.makeText(LoginActivity.this, "You have logged in", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Username does not exist", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
                     }
+                /* Username does not exist under customer or owner in database */
+                } else {
+                    Toast.makeText(LoginActivity.this, "No such username exists", Toast.LENGTH_SHORT).show();
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-        }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //No need
+            }
+        });
     }
 }
