@@ -1,20 +1,24 @@
 package com.example.cscb07app;
+
+import androidx.annotation.NonNull;
+
 //hello my name is youngjae heo
 public class User {
-
-    String username;
+    //CHANGED THE FIELD TO EMAIL FROM USERNAME FOR BETTER CLARITY MIGHT CHANGE BACK TO USERNAME
+    //IF PEOPLE ALREADY USED THE FIELD "USERNAME" A LOT IN THEIR CODE
+    String email;
     String password;
 
     public User() {
     }
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
@@ -27,12 +31,33 @@ public class User {
     }
 
     public User setUsername(String username) {
-        this.username = username;
+        this.email = email;
         return this;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "The current user's username is:" + username;
+        return "The current user's username is:" + email;
+    }
+    //TWO USER OBJECTS ARE EQUAL IFF EMAILS ARE THE SAME
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
+        if(obj.getClass() != this.getClass()){
+            return false;
+        }
+        User other = (User)obj;
+        return other.email.equals(this.email);
     }
 }
+    
+    
+
+
+
