@@ -32,7 +32,7 @@ public class Order {
             //The item is in the order
             //the out method will replace the current item with the new
             //one if the keys are the same
-            cart.put(p.getId(), cart.get(p.getId()) + i);
+                cart.put(p.getId(), cart.get(p.getId()) + i);
         }
     }
 
