@@ -3,6 +3,8 @@ package com.example.cscb07app.owner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.cscb07app.R;
+import com.example.cscb07app.owner.store_manager.StoreManagerActivity;
+import com.example.cscb07app.owner.customer_orders.CustomerOrdersActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,11 +19,11 @@ import android.widget.TextView;
 /**Home Menu for Store Owner, only accessible by Store Owner Accounts.
  * Login screen must sends the Owner username in the Intent to initialize an Owner Class.*/
 
-// TODO: add intent to other activities
 /**Important notice: Owner class methods and intent extra for username can change in the future.*/
 
 public class OwnerHomeActivity extends AppCompatActivity implements View.OnClickListener{
 
+    public static final String STORE_ID_EXTRA = "STORE_ID_EXTRA";
     protected Owner account;
     private TextView OwnerInfoTxtView;
 
@@ -65,7 +67,8 @@ public class OwnerHomeActivity extends AppCompatActivity implements View.OnClick
             this.openCustomerOrders();
     }
 
-    // this should be either an interface, or implemented in User class.
+    /* This method is currently not necessary, and should be implemented as an interface because
+       CustomerHomeActivity may also use it.*/
     private void displayAccountInformation(){
         String infoText = String.format("Username: %s\n" +
                                         "Role: Store Owner", account.getUsername());
@@ -73,10 +76,13 @@ public class OwnerHomeActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void openStoreManager(){
-
+        Intent startStoreManager = new Intent(this, StoreManagerActivity.class);
+        startStoreManager.putExtra(STORE_ID_EXTRA, this.account.storeId);
+        startActivity(startStoreManager);
     }
 
     private void openCustomerOrders(){
-
+        Intent startCustomerOrders = new Intent(this, CustomerOrdersActivity.class);
+        startCustomerOrders.putExtra(STORE_ID_EXTRA, this.account.storeId);
     }
 }
