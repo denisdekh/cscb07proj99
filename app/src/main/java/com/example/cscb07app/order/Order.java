@@ -1,5 +1,6 @@
 package com.example.cscb07app.order;
 
+import com.example.cscb07app.customer.Customer;
 import com.example.cscb07app.product.Product;
 
 import java.util.HashMap;
@@ -8,11 +9,15 @@ public class Order {
     //Fields
     HashMap<String, Integer> cart;
     //unordered pairs of the form (product id, amount)
+    String orderId; //Id of the order
+    Customer customer; //Customer who placed the order
 
     //Constructors
-    public Order(){
+    public Order(String orderId, Customer customer){
         //initializes the HashMap
         cart = new HashMap<>();
+        this.orderId = orderId;
+        this.customer = customer;
     }
 
     //Methods
