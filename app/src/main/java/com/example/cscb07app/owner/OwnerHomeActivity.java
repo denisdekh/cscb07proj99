@@ -3,6 +3,7 @@ package com.example.cscb07app.owner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.cscb07app.R;
+import com.example.cscb07app.login.LoginActivity;
 import com.example.cscb07app.owner.store_manager.StoreManagerActivity;
 import com.example.cscb07app.owner.customer_orders.CustomerOrdersActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +34,7 @@ public class OwnerHomeActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_owner_home);
 
         // Retrieve account information
-        String username = getIntent().getStringExtra("username");
+        String username = getIntent().getStringExtra(LoginModel.USERNAME);
         DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference("Account").
                 child("Owner").child(username);
         ValueEventListener accountlistener = new ValueEventListener() {
