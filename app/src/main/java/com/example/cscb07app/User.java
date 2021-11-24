@@ -8,7 +8,7 @@ public class User {
     //IF PEOPLE ALREADY USED THE FIELD "USERNAME" A LOT IN THEIR CODE
     String username;
     String password;
-
+    //MAKE SURE TO READ
     public User() {
     }
 
