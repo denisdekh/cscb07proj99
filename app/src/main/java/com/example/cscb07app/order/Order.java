@@ -11,6 +11,7 @@ public class Order {
     //unordered pairs of the form (product id, amount)
     String orderId; //Id of the order
     Customer customer; //Customer who placed the order
+    Store store; //Store the order was sent to
 
     //Constructors
     public Order(String orderId, Customer customer){
