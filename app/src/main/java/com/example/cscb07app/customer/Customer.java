@@ -2,13 +2,16 @@ package com.example.cscb07app.customer;
 
 import com.example.cscb07app.User;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Customer extends User {
+    ArrayList<Order> orders;
 
-    public Customer() {
+    public Customer(String email, String password) {
+        super(email, password);
+        orders = new ArrayList<Order>();
+    }
 
-    }
-    public Customer(String username, String password) {
-        super(username, password);
-    }
 
 }
