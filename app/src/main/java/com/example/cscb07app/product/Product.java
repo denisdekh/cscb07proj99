@@ -35,7 +35,9 @@ public class Product {
     public String getBrand() {
         return brand;
     }
-    public void setBrand(String brand){ this.brand = brand; }
+    public void setBrand(String brand){
+        this.brand = brand;
+    }
 
     public String getDescription() {
         return description;
@@ -44,6 +46,10 @@ public class Product {
         this.description = description;
     }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price){ this.price = price; }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price){
+        this.price = price;
+    }
 }
