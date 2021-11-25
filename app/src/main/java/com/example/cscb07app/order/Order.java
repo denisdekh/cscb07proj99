@@ -10,15 +10,16 @@ public class Order {
     HashMap<String, Integer> cart;
     //unordered pairs of the form (product id, amount)
     String orderId; //Id of the order
-    Customer customer; //Customer who placed the order
-    Store store; //Store the order was sent to
+    String customerName; //Customer who placed the order
+    String storeId; //Store the order was sent to
 
     //Constructors
-    public Order(String orderId, Customer customer){
+    public Order(String orderId, Customer customer, Store store){
         //initializes the HashMap
         cart = new HashMap<>();
         this.orderId = orderId;
-        this.customer = customer;
+        this.customerName = customer.getUsername();
+        this.storeId = store.getId();
     }
 
     //Methods
@@ -64,5 +65,12 @@ public class Order {
                 cart.put(p.getId(), cart.get(p.getId()) - i);
             }
         }
+    }
+    public String getCustomerName(){
+        return customer.getUsername();
+    }
+
+    public String getStoreName(){
+        //return store.getName();;
     }
 }
