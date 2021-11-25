@@ -3,11 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Lukas/AndroidStudioProjects/cscb07app/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/Lukas/AndroidStudioProjects/cscb07app/app/src/main/res/layout/activity_owner_home.xml" value="0.5" />
-        <entry key="..\:/Users/Lukas/AndroidStudioProjects/cscb07app/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/Users/Lukas/Desktop/cscb07project/app/src/main/res/layout/activity_login.xml" value="0.5" />
-        <entry key="..\:/Users/Lukas/Desktop/cscb07project/app/src/main/res/layout/activity_register.xml" value="0.67" />
+        <entry key="..\:/Users/denya/Documents/GitHub/cscb07proj99/app/src/main/res/layout/activity_customer_home.xml" value="0.33" />
+        <entry key="..\:/Users/denya/Documents/GitHub/cscb07proj99/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/denya/Documents/GitHub/cscb07proj99/app/src/main/res/layout/activity_owner_home.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/denya/Documents/GitHub/cscb07proj99/app/src/main/res/layout/activity_register.xml" value="0.67" />
+        <entry key="..\:/Users/denya/Documents/GitHub/cscb07proj99/app/src/main/res/layout/activity_store_list.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

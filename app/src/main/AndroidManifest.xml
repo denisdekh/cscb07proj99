@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cscb07app">
         <activity
+            android:name=".customer.CustomerHomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".owner.OwnerHomeActivity"
             android:exported="false" />
         <activity

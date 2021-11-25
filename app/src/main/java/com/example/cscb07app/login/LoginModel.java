@@ -2,8 +2,6 @@ package com.example.cscb07app.login;
 
 import androidx.annotation.NonNull;
 
-import com.example.cscb07app.customer.Customer;
-import com.example.cscb07app.owner.Owner;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,6 +11,9 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginModel implements LoginContract.LoginModel {
 
     DatabaseReference ref_accounts = FirebaseDatabase.getInstance().getReference("Account");
+
+
+
 
     @Override
     public void accountExists(String username, String password, LoginContract.View view) {

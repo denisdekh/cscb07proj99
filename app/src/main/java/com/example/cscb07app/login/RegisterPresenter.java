@@ -19,4 +19,7 @@ public class RegisterPresenter implements LoginContract.RegisterPresenter {
             model.accountCreate(username, password, usertype, view);
         }
     }
+
+
+
 }
