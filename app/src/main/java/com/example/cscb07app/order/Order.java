@@ -67,7 +67,7 @@ public class Order {
         }
     }
     public String getCustomerName(){
-        return customer.getUsername();
+        return customerName;
     }
 
     public String getStoreName(){
