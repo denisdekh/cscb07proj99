@@ -7,11 +7,11 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Customer extends User {
-    ArrayList<Order> orders;
+    ArrayList<String> orderIds;
 
     public Customer(String email, String password) {
         super(email, password);
-        orders = new ArrayList<Order>();
+        orderIds = new ArrayList<String>();
     }
 
 }
