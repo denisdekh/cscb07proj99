@@ -57,6 +57,8 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
         presenter = new RegisterPresenter(new RegisterModel(), this);
         presenter.checkAccount();
 
+
+        /*
         if(getUserType().equals("Customer")) {
             Intent intent = new Intent(this, CustomerHomeActivity.class);
             intent.putExtra(USERNAME_MESSAGE, getUsername());
@@ -65,6 +67,6 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
             Intent intent = new Intent(this, OwnerHomeActivity.class);
             intent.putExtra(USERNAME_MESSAGE, getUsername());
             startActivity(intent);
-        }
+        } */
     }
 }

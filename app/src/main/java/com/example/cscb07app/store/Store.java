@@ -20,6 +20,5 @@ public class Store {
         this.name = name;
         this.description = description;
 
-
     }
 }

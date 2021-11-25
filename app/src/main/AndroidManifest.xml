@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cscb07app">
         <activity
+            android:name=".customer.CustomerSettingsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".customer.CustomerHomeActivity" />
+        </activity>
+        <activity
             android:name=".customer.CustomerHomeActivity"
             android:exported="false" />
         <activity
