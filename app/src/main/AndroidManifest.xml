@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cscb07app">
         <activity
+            android:name=".owner.customer_orders.CustomerOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".owner.store_manager.StoreManagerActivity"
+            android:exported="false" />
+        <activity
             android:name=".owner.OwnerHomeActivity"
             android:exported="false" />
         <activity
