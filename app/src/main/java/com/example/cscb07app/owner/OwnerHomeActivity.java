@@ -6,6 +6,7 @@ import com.example.cscb07app.R;
 import com.example.cscb07app.login.LoginModel;
 import com.example.cscb07app.owner.store_manager.StoreManagerActivity;
 import com.example.cscb07app.owner.customer_orders.CustomerOrdersActivity;
+import com.example.cscb07app.store.Store;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
