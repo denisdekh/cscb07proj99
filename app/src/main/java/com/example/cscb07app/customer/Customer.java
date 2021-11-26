@@ -14,5 +14,4 @@ public class Customer extends User {
         orderIds = new ArrayList<String>();
     }
 
-
 }
