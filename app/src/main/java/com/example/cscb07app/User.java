@@ -8,13 +8,18 @@ public class User {
     //IF PEOPLE ALREADY USED THE FIELD "USERNAME" A LOT IN THEIR CODE
     String username;
     String password;
+    String email;
+    String name;
+
     //MAKE SURE TO READ
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String email, String name) {
         this.username = username;
         this.password = password;
+        this.name = name;
+        this.email = email;
     }
 
     public String getUsername() {
