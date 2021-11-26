@@ -10,6 +10,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cscb07app.R;
+import com.example.cscb07app.owner.OwnerHomeActivity;
+import com.example.cscb07app.customer.CustomerHomeActivity;
+
+import java.util.concurrent.TimeUnit;
 
 public class RegisterActivity extends AppCompatActivity implements LoginContract.View {
 
@@ -44,6 +48,15 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
         return usertypeTextEdit.getSelectedItem().toString();
     }
 
+    //Dummy function for mockito testing
+    public void valid() {
+
+    }
+    //Dummy function for mockito testing
+    public void invalid() {
+
+    }
+
     public void toSignInButton(View view) {
         Intent intent1 = new Intent(this, LoginActivity.class);
         startActivity(intent1);
@@ -52,5 +65,17 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
     public void RegisterButton(View view) {
         presenter = new RegisterPresenter(new RegisterModel(), this);
         presenter.checkAccount();
+
+
+        /*
+        if(getUserType().equals("Customer")) {
+            Intent intent = new Intent(this, CustomerHomeActivity.class);
+            intent.putExtra(USERNAME_MESSAGE, getUsername());
+            startActivity(intent);
+        } else if (getUserType().equals("Owner")) {
+            Intent intent = new Intent(this, OwnerHomeActivity.class);
+            intent.putExtra(USERNAME_MESSAGE, getUsername());
+            startActivity(intent);
+        } */
     }
 }
