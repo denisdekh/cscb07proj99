@@ -30,6 +30,14 @@ public class User {
         return password;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
     public User setPassword(String password) {
         this.password = password;
         return this;
