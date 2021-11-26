@@ -1,7 +1,7 @@
 package com.example.cscb07app;
 
 import androidx.annotation.NonNull;
-
+//h
 //hello my name is youngjae heo
 public class User {
     //CHANGED THE FIELD TO EMAIL FROM USERNAME FOR BETTER CLARITY MIGHT CHANGE BACK TO USERNAME
