@@ -3,7 +3,6 @@ package com.example.cscb07app.owner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.cscb07app.R;
-import com.example.cscb07app.login.LoginActivity;
 import com.example.cscb07app.login.LoginModel;
 import com.example.cscb07app.owner.store_manager.StoreManagerActivity;
 import com.example.cscb07app.owner.customer_orders.CustomerOrdersActivity;
@@ -15,7 +14,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

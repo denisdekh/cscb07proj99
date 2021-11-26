@@ -3,7 +3,6 @@ package com.example.cscb07app.owner.store_manager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.cscb07app.R;
-import com.example.cscb07app.owner.Owner;
 import com.example.cscb07app.owner.OwnerHomeActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,7 +14,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 /** Activity allows Owner to edit Store information and item listing.*/
