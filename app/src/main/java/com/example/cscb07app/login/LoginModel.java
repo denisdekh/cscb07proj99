@@ -51,8 +51,8 @@ public class LoginModel implements LoginContract.LoginModel {
                         view.valid();
                         view.displayMessage("You have been logged in");
                         Intent intent = new Intent((Context)view, CustomerHomeActivity.class);
-                        Intent.putExtra(USERNAME, username);
-                        ((Context view).startActivity(intent);
+                        intent.putExtra(USERNAME, username);
+                        ((Context) view).startActivity(intent);
                     } else {
                         view.invalid();
                         view.displayMessage("Incorrect Password");
