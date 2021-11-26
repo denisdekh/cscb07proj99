@@ -6,6 +6,7 @@ import com.example.cscb07app.R;
 import com.example.cscb07app.login.LoginModel;
 import com.example.cscb07app.owner.store_manager.StoreManagerActivity;
 import com.example.cscb07app.owner.customer_orders.CustomerOrdersActivity;
+import com.example.cscb07app.store.Store;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -84,10 +85,10 @@ public class OwnerHomeActivity extends AppCompatActivity implements View.OnClick
     private void openStoreManager(String id){
         String storeId = "";
         // create a new id for a new store
-        if (id == null){
+        if (id.equals("")){
             Store newStore = new Store();
 
-            // One time reader to read number of stores
+            // One time reader to rea   d number of stores
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
             DatabaseReference storeCountRef = ref.child("noOfStores");
 
@@ -121,7 +122,7 @@ public class OwnerHomeActivity extends AppCompatActivity implements View.OnClick
     private void openCustomerOrders(String storeId){
         String warningMessage = "Your store has not been set up, click Store Manager to set up your store.";
 
-        if (storeId == null){
+        if (storeId.equals("")){
             Toast.makeText(this, warningMessage, Toast.LENGTH_SHORT).show();
         }
         else {

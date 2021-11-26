@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.cscb07app.R;
 import com.example.cscb07app.owner.OwnerHomeActivity;
+import com.example.cscb07app.store.Store;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,6 +68,12 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        this.displayStoreName();
+    }
+
+    @Override
     public void onClick(View v) {
         int viewId = v.getId();
         if (viewId == editButton.getId()){
@@ -78,9 +85,9 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
         String extraName = "";
         String extraDescription = "";
 
-        if (!(this.store.name == null) || !(this.store.description == null)){
-            extraName = this.store.name;
-            extraDescription = this.store.description;
+        if (!(store.getName().equals("")) || !(store.getDescription().equals(""))){
+            extraName = store.getName();
+            extraDescription = store.getDescription();
         }
 
         Intent openActivity = new Intent(this, EditStoreInfoActivity.class);
@@ -92,8 +99,8 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
 
     private void displayStoreName(){
         String storeName = "Unnamed Store";
-        if (this.store.name != null){
-            storeName = this.store.name;
+        if (!(this.store.getName().equals(""))){
+            storeName = this.store.getName();
         }
         textViewStoreName.setText(storeName);
     }

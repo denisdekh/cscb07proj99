@@ -2,6 +2,7 @@ package com.example.cscb07app.order;
 
 import com.example.cscb07app.customer.Customer;
 import com.example.cscb07app.product.Product;
+import com.example.cscb07app.store.Store;
 
 import java.util.HashMap;
 
@@ -71,6 +72,6 @@ public class Order {
     }
 
     public String getStoreName(){
-        //return store.getName();;
+        return "";
     }
 }
