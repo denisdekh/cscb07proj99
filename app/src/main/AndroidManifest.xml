@@ -25,9 +25,6 @@
             android:name=".customer.CustomerHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".owner.customer_orders.CustomerOrdersActivity"
-            android:exported="false" />
-        <activity
             android:name=".owner.store_manager.StoreManagerActivity"
             android:exported="false"
             android:label="@string/title_activity_store_manager"
