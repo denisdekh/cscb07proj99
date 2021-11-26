@@ -17,6 +17,7 @@
     <string name="enter_username">New Username:</string>
     <string name="new_password">New Password:</string>
     <string name="change_password">Change Password</string>
+    <string name="AccountInformationButtonDisplay">Account Information</string>
     <string-array name="users">
         <item>Owner</item>
         <item>Customer</item>

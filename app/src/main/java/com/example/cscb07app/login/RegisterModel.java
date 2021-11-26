@@ -27,17 +27,20 @@ public class RegisterModel implements LoginContract.RegisterModel {
                 DataSnapshot ref_customers = snapshot.child("Customer");
                 //Ensure the username does not already exist under customer and owner
                 if (!ref_owners.child(username).exists() && !ref_customers.child(username).exists()) {
-                    if (usertype.equals("Owner")) { //If the user is registering an owner account
-                        Owner current = new Owner(username, password);
+                    //If the user is registering an owner account
+                    if (usertype.equals("Owner")) {
                         ref_accounts.child("Owner").child(username).child("username").setValue(username);
                         ref_accounts.child("Owner").child(username).child("password").setValue(password);
-                    } else { //If the user is registering a customer account
-                        Customer current = new Customer(username, password);
+                        ref_accounts.child("Owner").child(username).child("storeId").setValue("");
+                        //If the user is registering a customer account
+                    } else {
                         ref_accounts.child("Customer").child(username).child("username").setValue(username);
                         ref_accounts.child("Customer").child(username).child("password").setValue(password);
                     }
+                    view.valid();
                     view.displayMessage("Your account has been created");
                 } else {
+                    view.invalid();
                     view.displayMessage("The username already exists");
                 }
             }

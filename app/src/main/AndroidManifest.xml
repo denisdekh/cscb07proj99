@@ -20,6 +20,12 @@
             android:name=".customer.CustomerHomeActivity"
             android:exported="false" />
         <activity
+            android:name=".owner.customer_orders.CustomerOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".owner.store_manager.StoreManagerActivity"
+            android:exported="false" />
+        <activity
             android:name=".owner.OwnerHomeActivity"
             android:exported="false" />
         <activity

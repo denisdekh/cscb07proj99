@@ -48,6 +48,15 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
         return usertypeTextEdit.getSelectedItem().toString();
     }
 
+    //Dummy function for mockito testing
+    public void valid() {
+
+    }
+    //Dummy function for mockito testing
+    public void invalid() {
+
+    }
+
     public void toSignInButton(View view) {
         Intent intent1 = new Intent(this, LoginActivity.class);
         startActivity(intent1);

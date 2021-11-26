@@ -27,6 +27,8 @@ public interface LoginContract {
         public String getUsername();
         public String getPassword();
         public String getUserType();
+        public void valid();
+        public void invalid();
         public void displayMessage(String message);
     }
 }
