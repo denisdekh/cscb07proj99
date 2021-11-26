@@ -20,6 +20,9 @@ public class LoginModel implements LoginContract.LoginModel {
     DatabaseReference ref_accounts = FirebaseDatabase.getInstance().getReference("Account");
     public static final String USERNAME = "com.example.app.USERNAME";
 
+
+
+
     @Override
     public void accountExists(String username, String password, LoginContract.View view) {
         ref_accounts.addListenerForSingleValueEvent(new ValueEventListener() {

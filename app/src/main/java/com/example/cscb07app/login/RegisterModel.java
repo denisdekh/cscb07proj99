@@ -1,5 +1,7 @@
 package com.example.cscb07app.login;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.cscb07app.customer.Customer;
@@ -13,6 +15,8 @@ import com.google.firebase.database.ValueEventListener;
 public class RegisterModel implements LoginContract.RegisterModel {
 
     DatabaseReference ref_accounts = FirebaseDatabase.getInstance().getReference("Account");
+
+
 
     @Override
     public void accountCreate(String username, String password, String usertype, LoginContract.View view) {

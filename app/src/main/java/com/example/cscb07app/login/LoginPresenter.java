@@ -18,4 +18,5 @@ public class LoginPresenter implements LoginContract.LoginPresenter{
             model.accountExists(username, password, view);
         }
     }
+
 }

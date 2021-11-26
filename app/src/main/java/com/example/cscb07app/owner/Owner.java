@@ -1,5 +1,7 @@
 package com.example.cscb07app.owner;
 
+
+import com.example.cscb07app.store.Store;
 import com.example.cscb07app.User;
 
 import java.util.ArrayList;
