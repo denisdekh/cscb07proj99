@@ -38,6 +38,16 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
         return usernameTextEdit.getText().toString();
     }
 
+    public String getEmail() {
+        EditText emailTextEdit = findViewById(R.id.email);
+        return emailTextEdit.getText().toString();
+    }
+
+    public String getName() {
+        EditText nameTextEdit = findViewById(R.id.name);
+        return nameTextEdit.getText().toString();
+    }
+
     public String getPassword() {
         EditText passwordTextEdit = findViewById(R.id.password);
         return passwordTextEdit.getText().toString();
@@ -66,16 +76,5 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
         presenter = new RegisterPresenter(new RegisterModel(), this);
         presenter.checkAccount();
 
-
-        /*
-        if(getUserType().equals("Customer")) {
-            Intent intent = new Intent(this, CustomerHomeActivity.class);
-            intent.putExtra(USERNAME_MESSAGE, getUsername());
-            startActivity(intent);
-        } else if (getUserType().equals("Owner")) {
-            Intent intent = new Intent(this, OwnerHomeActivity.class);
-            intent.putExtra(USERNAME_MESSAGE, getUsername());
-            startActivity(intent);
-        } */
     }
 }

@@ -14,6 +14,8 @@ public class LoginPresenter implements LoginContract.LoginPresenter{
         String password = view.getPassword();
         if(username.equals("")) {
             view.displayMessage("Username field is empty");
+        } else if (password.equals("")) {
+            view.displayMessage("Password field is empty");
         } else {
             model.accountExists(username, password, view);
         }

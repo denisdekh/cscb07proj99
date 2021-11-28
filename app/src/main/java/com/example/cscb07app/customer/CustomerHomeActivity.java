@@ -64,7 +64,6 @@ public class CustomerHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home);
-
         Intent intent = getIntent();
         String username = intent.getStringExtra(RegisterActivity.USERNAME_MESSAGE);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.stores_layout);

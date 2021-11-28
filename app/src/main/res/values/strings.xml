@@ -3,10 +3,12 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_username">Username</string>
     <string name="action_sign_in">Sign in</string>
-    <string name="action_toSign_in">Click to Sign in</string>
-    <string name="action_register">Register</string>
-    <string name="action_toRegister">Click to Register</string>
+    <string name="action_toSign_in">Click here to Sign in</string>
+    <string name="action_register">Register Account</string>
+    <string name="action_toRegister">Register Here</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
