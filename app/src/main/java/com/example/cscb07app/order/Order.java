@@ -20,7 +20,7 @@ public class Order {
         cart = new HashMap<>();
         this.orderId = orderId;
         this.customerName = customer.getUsername();
-        this.storeId = store.getId();
+        //this.storeId = store.getId();
     }
 
     //Methods
