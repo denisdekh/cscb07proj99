@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /** Allows Owner to update their store's name and description*/
 /*  Database field may change*/
@@ -45,5 +46,7 @@ public class EditStoreInfoActivity extends AppCompatActivity {
                 child(this.storeId);
         storeRef.child("name").setValue(newName);
         storeRef.child("description").setValue(newDescription);
+
+        Toast.makeText(this, "Edit Successful!", Toast.LENGTH_SHORT).show();
     }
 }

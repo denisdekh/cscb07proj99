@@ -13,6 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -47,30 +48,25 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
         // Retrieve Store information
         DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("Stores").
                 child(this.storeId);
-        ValueEventListener storelistener = new ValueEventListener() {
+        storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                store = snapshot.getValue(Store.class);
+                String name = (String)snapshot.child("name").getValue();
+                String description = (String)snapshot.child("description").getValue();
+                store = new Store(storeId, name, description);
+                Log.i("test", String.format("%s, %s, %s",storeId, name, description));
+                displayStoreName();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // when reading failed, no need.
+                // nothing
             }
-        };
-        storeRef.addValueEventListener(storelistener);
+        });
 
         editButton = (Button)findViewById(R.id.EditStoreNameBut);
         textViewStoreName = (TextView)findViewById(R.id.TextViewStoreName);
         editButton.setOnClickListener(this);
-
-        this.displayStoreName();
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        this.displayStoreName();
     }
 
     @Override
