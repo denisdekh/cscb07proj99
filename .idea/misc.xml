@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Documents/Uni materials/Fall 2021 Courses/CSCB07/Project/app/src/main/res/layout/activity_edit_store_info.xml" value="0.3578125" />
+        <entry key="..\:/Documents/Uni materials/Fall 2021 Courses/CSCB07/Project/app/src/main/res/layout/activity_store_manager.xml" value="0.371875" />
         <entry key="..\:/Users/Lukas/AndroidStudioProjects/cscb07app/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/Lukas/AndroidStudioProjects/cscb07app/app/src/main/res/layout/activity_owner_home.xml" value="0.5" />
         <entry key="..\:/Users/Lukas/AndroidStudioProjects/cscb07app/app/src/main/res/layout/activity_register.xml" value="0.33" />
@@ -12,7 +14,6 @@
         <entry key="..\:/Users/Youngjae Heo/StudioProjects/cscb07proj99/app/src/main/res/layout/activity_owner_home.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/Youngjae Heo/StudioProjects/cscb07proj99/app/src/main/res/layout/activity_register.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Youngjae Heo/StudioProjects/cscb07proj99/app/src/main/res/layout/activity_store_manager.xml" value="0.371875" />
-        <entry key="..\:/Documents/Uni materials/Fall 2021 Courses/CSCB07/Project/app/src/main/res/layout/activity_edit_store_info.xml" value="0.3578125" />
       </map>
     </option>
   </component>
