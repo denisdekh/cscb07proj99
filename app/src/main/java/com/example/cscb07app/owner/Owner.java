@@ -10,8 +10,9 @@ public class Owner extends User {
 
     }
 
-    public Owner(String email, String password) {
-        super(email, password);
+    public Owner(String username, String password, String name, String email, String storeId) {
+        super(username, password, name, email);
+        setStoreId(storeId);
     }
 
     public void setStoreId(String storeId) {
