@@ -3,6 +3,7 @@ package com.example.cscb07app.customer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.cscb07app.login.LoginModel;
 import com.example.cscb07app.store.Store;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,7 +47,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             case R.id.action_settings:
                 // User chose the "Settings" item
                 Intent intent = getIntent();
-                String username = intent.getStringExtra(RegisterActivity.USERNAME_MESSAGE);
+                String username = intent.getStringExtra(LoginModel.USERNAME);
                 Intent intent2 = new Intent(this, CustomerSettingsActivity.class);
                 intent.putExtra("com.example.USERNAME", username);
                 startActivity(intent2);
@@ -103,12 +104,12 @@ public class CustomerHomeActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String id = child.getKey();
-                    String name = child.child("store name").getValue().toString();
+                    String name = child.child("name").getValue().toString();
                     String desc = child.child("description").getValue().toString();
 
                     addStore(id, name, desc, context, linearLayout);
-                    Log.d("test", "Stores size: " + Integer.toString(stores.size()));
                 }
+                
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
