@@ -31,8 +31,11 @@
             android:parentActivityName=".owner.OwnerHomeActivity" />
         <activity
             android:name=".owner.customer_orders.CustomerOrdersActivity"
-            android:exported="false"
-            android:parentActivityName=".owner.OwnerHomeActivity" />
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".owner.OwnerHomeActivity" />
+        </activity>
         <activity
             android:name=".owner.OwnerHomeActivity"
             android:exported="false"

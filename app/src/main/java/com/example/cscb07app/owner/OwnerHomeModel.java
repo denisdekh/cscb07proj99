@@ -58,6 +58,7 @@ public class OwnerHomeModel implements OwnerHomeContract.Model{
                 // create a new store on the database
                 ref.child("noOfStores").setValue("" + (storeCount+1));
 
+                newStore.setId(newStoreId);
                 ref.child("Stores").child(newStoreId).setValue(newStore);
                 ref.child("Stores").child(newStoreId).child("items").setValue("");
                 ref.child("Stores").child(newStoreId).child("orders").setValue("");
