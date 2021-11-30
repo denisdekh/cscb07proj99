@@ -19,10 +19,11 @@ import java.util.ArrayList;
 public class CustomerOrdersActivity extends AppCompatActivity {
 
     private String storeId;
-    private String[] orders;
+    private ArrayList<String> orders;
     String s = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        orders = new ArrayList<String>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders);
 
@@ -37,7 +38,9 @@ public class CustomerOrdersActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot store: snapshot.getChildren()){
                     if (store.getKey().equals(storeId)){
-                        orders = store.child("orders").getValue(String.class).split(",");
+                        for(DataSnapshot order: store.child("orders").getChildren()){
+                            orders.add(order.getKey());
+                        }
                     }
                 }
             }
@@ -54,8 +57,8 @@ public class CustomerOrdersActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot order: snapshot.getChildren()){
-                    for (int i = 0;i<orders.length;i++){
-                        if (orders[i].equals(order.getKey())){
+                    for (int i = 0;i<orders.size();i++){
+                        if (orders.get(i).equals(order.getKey())){
                             String customer = order.child("Customer").getValue(String.class);
                             String store = order.child("Store").getValue(String.class);
                             s+= "Customer: " + customer + " Store: " + store + "\n";
