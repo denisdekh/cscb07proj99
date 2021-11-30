@@ -74,11 +74,14 @@ public class CustomerMakeOrderActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        getProducts(this, scroll, id);
+        LinearLayout content = new LinearLayout(this);
+        content.setOrientation(LinearLayout.VERTICAL);
+        scroll.addView(content);
+        getProducts(this, content, id);
 
     }
 
-    public void addProduct(String id, String name, String desc, String price, String brand, Context context, ScrollView scroll) {
+    public void addProduct(String id, String name, String desc, String price, String brand, Context context, LinearLayout scroll) {
         if (name.equals("")) return;
 
         LinearLayout product = new LinearLayout(context);
@@ -182,7 +185,7 @@ public class CustomerMakeOrderActivity extends AppCompatActivity {
         scroll.addView(product);
     }
 
-    public void getProducts(Context context, ScrollView scroll, String id) {
+    public void getProducts(Context context, LinearLayout scroll, String id) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Stores").child(id).child("items");
 
         ref.addValueEventListener(new ValueEventListener() {

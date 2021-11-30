@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.cscb07app.R;
@@ -66,8 +67,14 @@ public class CustomerHomeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String username = intent.getStringExtra(RegisterActivity.USERNAME_MESSAGE);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.stores_layout);
-
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        ScrollView scroll = new ScrollView(this);
+        this.addContentView(scroll, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        scroll.addView(linearLayout);
 
         getStores(this, linearLayout);
     }
