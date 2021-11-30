@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.cscb07app.customer.CustomerMakeOrderActivity" >
+    <item android:id="@+id/finish_order"
+        android:title="@string/finish_Order"
+        android:icon="@android:drawable/checkbox_on_background"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        app:showAsAction="always"/>
+
+</menu>
