@@ -66,7 +66,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customer_home);
 
         Intent intent = getIntent();
-        String username = intent.getStringExtra(RegisterActivity.USERNAME_MESSAGE);
+        String username = intent.getStringExtra(LoginModel.USERNAME);
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         ScrollView scroll = new ScrollView(this);

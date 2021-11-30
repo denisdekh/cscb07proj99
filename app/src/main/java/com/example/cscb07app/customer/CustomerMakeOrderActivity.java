@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cscb07app.order.Order;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CustomerMakeOrderActivity extends AppCompatActivity {
 
-//Order order = new Order();
+Order order;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,13 +46,11 @@ public class CustomerMakeOrderActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                // User chose the "Settings" item
-                Intent intent = getIntent();
-                String username = intent.getStringExtra(LoginModel.USERNAME);
-                Intent intent2 = new Intent(this, CustomerSettingsActivity.class);
-                intent.putExtra("com.example.USERNAME", username);
-                startActivity(intent2);
+            case R.id.finish_order:
+                // User chose the "finish order" item
+
+                order.sendOrder();
+                Toast.makeText(this, "order has been sent", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
@@ -65,10 +64,9 @@ public class CustomerMakeOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         Intent intent = getIntent();
         String id = intent.getStringExtra(CustomerHomeActivity.STORE_ID);
-
+        String username = intent.getStringExtra(LoginModel.USERNAME);
         ScrollView scroll = new ScrollView(this);
         this.addContentView(scroll, new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -77,13 +75,14 @@ public class CustomerMakeOrderActivity extends AppCompatActivity {
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
         scroll.addView(content);
+
+        order = new Order("O3", username, id);
         getProducts(this, content, id);
 
     }
 
     public void addProduct(String id, String name, String desc, String price, String brand, Context context, LinearLayout scroll) {
         if (name.equals("")) return;
-
         LinearLayout product = new LinearLayout(context);
         LinearLayout name_desc = new LinearLayout(context);
         LinearLayout brand_price = new LinearLayout(context);
@@ -104,14 +103,12 @@ public class CustomerMakeOrderActivity extends AppCompatActivity {
         productName.setGravity(Gravity.LEFT);
         productName.setPadding(30, 30, 30, 30);
         productName.setTypeface(null, Typeface.BOLD);
-        //storeName.setBackgroundColor(0xaaffaaff);
 
         productBrand.setLayoutParams(params);
         productBrand.setText(brand);
         productBrand.setGravity(Gravity.LEFT);
         productBrand.setPadding(30, 30, 30, 30);
         productBrand.setTypeface(null, Typeface.BOLD);
-
 
         productDesc.setLayoutParams(params);
         productDesc.setText(desc);
@@ -122,7 +119,6 @@ public class CustomerMakeOrderActivity extends AppCompatActivity {
         productPrice.setText(price);
         productPrice.setGravity(Gravity.LEFT);
         productPrice.setPadding(30, 30, 30, 40);
-
 
         product.setOrientation(LinearLayout.HORIZONTAL);
         name_desc.setOrientation(LinearLayout.VERTICAL);
@@ -161,13 +157,13 @@ public class CustomerMakeOrderActivity extends AppCompatActivity {
         product.setBackground(ContextCompat.getDrawable(context, R.drawable.layout_bg));
         product.setClipToOutline(true);
 
-
         minus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int items = Integer.parseInt(num.getText().toString());
                 if (items > 0) {
                     items -= 1;
                     num.setText(Integer.toString(items));
+                    order.remItem(id);
                 }
             }
         });
@@ -175,10 +171,9 @@ public class CustomerMakeOrderActivity extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int items = Integer.parseInt(num.getText().toString());
-
                 items += 1;
                 num.setText(Integer.toString(items));
-
+                order.addItem(id);
             }
         });
 

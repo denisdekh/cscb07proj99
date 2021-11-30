@@ -55,8 +55,7 @@
         <activity
             android:name=".customer.CustomerMakeOrderActivity"
             android:exported="false"
-            android:label="@string/title_activity_customer_make_order"
-            android:theme="@style/Theme.Cscb07app.NoActionBar" >
+            android:label="@string/title_activity_customer_make_order" >
             <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".customer.CustomerHomeActivity" />
