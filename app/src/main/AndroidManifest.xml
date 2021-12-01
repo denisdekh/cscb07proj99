@@ -16,13 +16,14 @@
             android:exported="false" />
         <activity
             android:name=".customer.CustomerSettingsActivity"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".customer.CustomerHomeActivity" />
         </activity>
         <activity
             android:name=".customer.CustomerHomeActivity"
+            android:label="Available Stores"
             android:exported="false" />
         <activity
             android:name=".owner.store_manager.StoreManagerActivity"
@@ -52,6 +53,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".customer.CustomerMakeOrderActivity"
+            android:exported="false"
+            android:label="@string/title_activity_customer_make_order" >
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".customer.CustomerHomeActivity" />
+            </activity>
     </application>
 
 </manifest>
