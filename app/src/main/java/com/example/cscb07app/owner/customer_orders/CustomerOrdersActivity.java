@@ -21,6 +21,15 @@ public class CustomerOrdersActivity extends AppCompatActivity {
     private String storeId;
     private ArrayList<String> orders;
     String s = "";
+
+    private void setText(TextView t,String s){
+        t.setText(s);
+    }
+
+    private void addToArrayList(ArrayList<String> a,String s){
+        a.add(s);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         orders = new ArrayList<String>();
@@ -39,7 +48,7 @@ public class CustomerOrdersActivity extends AppCompatActivity {
                 for(DataSnapshot store: snapshot.getChildren()){
                     if (store.getKey().equals(storeId)){
                         for(DataSnapshot order: store.child("orders").getChildren()){
-                            orders.add(order.getKey());
+                            addToArrayList(orders,order.getKey());
                         }
                     }
                 }
@@ -64,13 +73,14 @@ public class CustomerOrdersActivity extends AppCompatActivity {
                             s+= "Customer: " + customer + " Store: " + store + "\n";
                             for (DataSnapshot product: order.child("cart").getChildren()){
                                 String productId = product.getKey();
-                                String frequency = product.getValue(String.class);
+                                String frequency = product.getValue().toString();
                                 s+= "   productId: " + productId+ " frequency: " + frequency + "\n";
 
                             }
                         }
                     }
                 }
+                setText(textView,s);
             }
 
             @Override
@@ -79,6 +89,6 @@ public class CustomerOrdersActivity extends AppCompatActivity {
             }
         });
 
-        textView.setText(s);
+
     }
 }
