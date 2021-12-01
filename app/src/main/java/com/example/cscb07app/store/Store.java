@@ -48,7 +48,7 @@ public class Store {
     public void setName(String name) {
         this.name = name;
     }
-  
+
     public List<Product> getItems() {
         return items;
     }
@@ -65,5 +65,3 @@ public class Store {
         this.orders = orders;
     }
 }
-
-

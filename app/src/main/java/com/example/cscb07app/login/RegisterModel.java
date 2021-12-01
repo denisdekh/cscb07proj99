@@ -1,5 +1,7 @@
 package com.example.cscb07app.login;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -19,7 +21,7 @@ public class RegisterModel implements LoginContract.RegisterModel {
 
 
     @Override
-    public void accountCreate(String username, String password, String usertype, LoginContract.View view) {
+    public void accountCreate(String name, String email, String username, String password, String usertype, LoginContract.View view) {
         ref_accounts.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -27,18 +29,25 @@ public class RegisterModel implements LoginContract.RegisterModel {
                 DataSnapshot ref_customers = snapshot.child("Customer");
                 //Ensure the username does not already exist under customer and owner
                 if (!ref_owners.child(username).exists() && !ref_customers.child(username).exists()) {
-                    //If the user is registering an owner account
-                    if (usertype.equals("Owner")) {
-                        ref_accounts.child("Owner").child(username).child("username").setValue(username);
-                        ref_accounts.child("Owner").child(username).child("password").setValue(password);
-                        ref_accounts.child("Owner").child(username).child("storeId").setValue("");
-                        //If the user is registering a customer account
-                    } else {
-                        ref_accounts.child("Customer").child(username).child("username").setValue(username);
-                        ref_accounts.child("Customer").child(username).child("password").setValue(password);
-                    }
-                    view.valid();
-                    view.displayMessage("Your account has been created");
+                    //Ensure fields are not empty
+                        //If the user is registering an owner account
+                        if (usertype.equals("Owner")) {
+                            ref_accounts.child("Owner").child(username).child("name").setValue(name);
+                            ref_accounts.child("Owner").child(username).child("email").setValue(email);
+                            ref_accounts.child("Owner").child(username).child("username").setValue(username);
+                            ref_accounts.child("Owner").child(username).child("password").setValue(password);
+                            ref_accounts.child("Owner").child(username).child("storeId").setValue("");
+                            //If the user is registering a customer account
+                        } else {
+                            ref_accounts.child("Customer").child(username).child("name").setValue(name);
+                            ref_accounts.child("Customer").child(username).child("email").setValue(email);
+                            ref_accounts.child("Customer").child(username).child("username").setValue(username);
+                            ref_accounts.child("Customer").child(username).child("password").setValue(password);
+                        }
+                        view.valid();
+                        view.displayMessage("Your account has been created");
+                        Intent intent = new Intent((Context) view, LoginActivity.class);
+                        ((Context) view).startActivity(intent);
                 } else {
                     view.invalid();
                     view.displayMessage("The username already exists");

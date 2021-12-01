@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,7 +49,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 Intent intent = getIntent();
                 String username = intent.getStringExtra(LoginModel.USERNAME);
                 Intent intent2 = new Intent(this, CustomerSettingsActivity.class);
-                intent.putExtra("com.example.USERNAME", username);
+                intent2.putExtra("USERNAME", username);
                 startActivity(intent2);
                 return true;
 
@@ -64,7 +65,6 @@ public class CustomerHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home);
-
         Intent intent = getIntent();
         String username = intent.getStringExtra(LoginModel.USERNAME);
         LinearLayout linearLayout = new LinearLayout(this);

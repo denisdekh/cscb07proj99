@@ -38,6 +38,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         return passwordTextEdit.getText().toString();
     }
 
+    public String getEmail() {
+        return "";
+    }
+
+    public String getName() {
+        return "";
+    }
+
     //Dummy function for mockito testing
     public void valid() {
 

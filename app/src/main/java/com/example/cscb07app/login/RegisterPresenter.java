@@ -10,16 +10,22 @@ public class RegisterPresenter implements LoginContract.RegisterPresenter {
     }
 
     public void checkAccount() {
+        String name = view.getName();
+        String email = view.getEmail();
         String username = view.getUsername();
         String password = view.getPassword();
         String usertype = view.getUserType();
-        if(username.equals("")) {
+        //Ensure none of the fields are empty
+        if (name.equals("")) {
+            view.displayMessage("Name field is empty");
+        } else if (email.equals("")) {
+            view.displayMessage("Email field is empty");
+        } else if (username.equals("")) {
             view.displayMessage("Username field is empty");
+        } else if (password.equals("")) {
+            view.displayMessage("Password field is empty");
         } else {
-            model.accountCreate(username, password, usertype, view);
+            model.accountCreate(name, email, username, password, usertype, view);
         }
     }
-
-
-
 }

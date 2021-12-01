@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cscb07app" >
+    package="com.example.cscb07app">
 
     <application
         android:allowBackup="true"
@@ -8,14 +8,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Cscb07app" >
+        android:theme="@style/Theme.Cscb07app">
         <activity
             android:name=".owner.store_manager.EditStoreInfoActivity"
-            android:exported="false"
+            android:parentActivityName=".owner.store_manager.StoreManagerActivity"
             android:label="@string/title_activity_edit_store_info"
-            android:parentActivityName=".owner.store_manager.StoreManagerActivity" />
+            android:exported="false" />
         <activity
             android:name=".customer.CustomerSettingsActivity"
+            android:label="Settings"
             android:exported="false" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -24,7 +25,8 @@
         <activity
             android:name=".customer.CustomerHomeActivity"
             android:label="Available Stores"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".owner.store_manager.StoreManagerActivity"
             android:exported="false"
@@ -33,18 +35,23 @@
         <activity
             android:name=".owner.customer_orders.CustomerOrdersActivity"
             android:exported="false"
-            android:parentActivityName=".owner.OwnerHomeActivity" />
+            android:label="@string/title_activity_customer_orders"
+            android:parentActivityName=".owner.store_manager.StoreManagerActivity" />
         <activity
             android:name=".owner.OwnerHomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_owner_home" />
-        <activity
-            android:name=".login.LoginActivity"
-            android:exported="false" />
+            android:label="@string/title_activity_owner_home"
+            android:launchMode="singleTask" />
+
         <activity
             android:name=".login.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".login.LoginActivity"
             android:exported="true"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,5 +68,4 @@
             android:value=".customer.CustomerHomeActivity" />
             </activity>
     </application>
-
 </manifest>
