@@ -118,7 +118,6 @@ public class Order {
     //the the orders section, where the orderId is the key to the order
     public void sendOrder(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Log.i("demo", "Made it to here");
 
         //Set the id of the order when sending it, and update the number of orders in the database
         ref.child("noOfOrders").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -138,7 +137,6 @@ public class Order {
 
                     //Sends the order to the database
                     setOrderId(newOrderId);
-                    Log.i("demo", "The order if for this order is: " + getOrderId());
 
                     //Manually setting the entry on firebase
                     ref.child("Orders").child(newOrderId).child("username").setValue(getUsername());
@@ -161,7 +159,6 @@ public class Order {
 
                     //Sends the order to the database
                     setOrderId(newOrderId); //sets the orderId to be one higher than previous id
-                    Log.i("demo", "The order if for this order is: " + getOrderId());
 
                     //Manually setting the entry on firebase
                     ref.child("Orders").child(newOrderId).child("username").setValue(getUsername());
