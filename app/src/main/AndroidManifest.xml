@@ -28,7 +28,8 @@
             android:name=".owner.store_manager.StoreManagerActivity"
             android:exported="false"
             android:label="@string/title_activity_store_manager"
-            android:parentActivityName=".owner.OwnerHomeActivity" />
+            android:parentActivityName=".owner.OwnerHomeActivity"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".owner.customer_orders.CustomerOrdersActivity"
             android:exported="false">
@@ -39,7 +40,8 @@
         <activity
             android:name=".owner.OwnerHomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_owner_home" />
+            android:label="@string/title_activity_owner_home"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".login.LoginActivity"
             android:exported="false" />
