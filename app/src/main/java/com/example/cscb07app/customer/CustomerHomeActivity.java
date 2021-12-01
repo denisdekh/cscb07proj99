@@ -48,7 +48,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 Intent intent = getIntent();
                 String username = intent.getStringExtra(LoginModel.USERNAME);
                 Intent intent2 = new Intent(this, CustomerSettingsActivity.class);
-                intent.putExtra("com.example.USERNAME", username);
+                intent.putExtra(LoginModel.USERNAME, username);
                 startActivity(intent2);
                 return true;
 

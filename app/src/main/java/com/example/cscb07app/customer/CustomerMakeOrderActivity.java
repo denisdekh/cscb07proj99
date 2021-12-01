@@ -116,7 +116,7 @@ Order order;
         productDesc.setPadding(30, 30, 30, 40);
 
         productPrice.setLayoutParams(params);
-        productPrice.setText(price);
+        productPrice.setText("$" + price);
         productPrice.setGravity(Gravity.LEFT);
         productPrice.setPadding(30, 30, 30, 40);
 
