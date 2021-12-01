@@ -24,7 +24,8 @@
         <activity
             android:name=".customer.CustomerHomeActivity"
             android:label="Available Stores"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".owner.store_manager.StoreManagerActivity"
             android:exported="false"
@@ -37,7 +38,9 @@
         <activity
             android:name=".owner.OwnerHomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_owner_home" />
+            android:label="@string/title_activity_owner_home"
+            android:launchMode="singleTask" />
+
         <activity
             android:name=".login.RegisterActivity"
             android:exported="false"
@@ -63,5 +66,4 @@
             android:value=".customer.CustomerHomeActivity" />
             </activity>
     </application>
-
 </manifest>
