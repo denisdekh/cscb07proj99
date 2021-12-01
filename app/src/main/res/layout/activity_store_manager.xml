@@ -24,7 +24,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:lineSpacingExtra="8sp"
-        android:text="UwU"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="24sp"
@@ -45,14 +44,16 @@
         app:layout_constraintStart_toEndOf="@+id/TextViewStoreName"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="624dp"
-        android:orientation="horizontal"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ItemListRecyclerView"
+        android:layout_width="399dp"
+        android:layout_height="627dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

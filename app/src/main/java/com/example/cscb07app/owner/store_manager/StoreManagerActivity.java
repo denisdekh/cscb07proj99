@@ -2,8 +2,13 @@ package com.example.cscb07app.owner.store_manager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.cscb07app.R;
 import com.example.cscb07app.owner.OwnerHomeActivity;
+import com.example.cscb07app.product.Product;
 import com.example.cscb07app.store.Store;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +22,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Activity allows Owner to edit Store information and item listing.*/
 
@@ -36,6 +45,7 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
     protected Store store;
     private Button editButton;
     private TextView textViewStoreName;
+    private RecyclerView itemRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +64,17 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
                 String name = (String)snapshot.child("name").getValue();
                 String description = (String)snapshot.child("description").getValue();
                 store = new Store(storeId, name, description);
-                Log.i("test", String.format("%s, %s, %s",storeId, name, description));
+
+                // TODO: set up a list of item ids.
+                List<Product> tempProductList = new ArrayList<Product>();
+                for (DataSnapshot p: snapshot.child("items").getChildren()){
+                    Product tempProduct = getProduct(p);
+                    if (tempProduct != null)
+                        tempProductList.add(tempProduct);
+                }
+                store.setItems(tempProductList);
                 displayStoreName();
+                setItemRecyclerAdapter();
             }
 
             @Override
@@ -66,7 +85,23 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
 
         editButton = (Button)findViewById(R.id.EditStoreNameBut);
         textViewStoreName = (TextView)findViewById(R.id.TextViewStoreName);
+        itemRecyclerView = (RecyclerView)findViewById(R.id.ItemListRecyclerView);
         editButton.setOnClickListener(this);
+    }
+
+    protected Product getProduct(DataSnapshot snap){
+        Product p = snap.getValue(Product.class);
+        if (p != null)
+            p.setId(snap.getKey());
+        return p;
+    }
+
+    protected void setItemRecyclerAdapter() {
+        ItemRecyclerAdapter adapter = new ItemRecyclerAdapter(store.getItems());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        this.itemRecyclerView.setLayoutManager(layoutManager);
+        this.itemRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        this.itemRecyclerView.setAdapter(adapter);
     }
 
     @Override
