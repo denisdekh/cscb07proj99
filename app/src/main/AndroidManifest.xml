@@ -16,6 +16,7 @@
             android:exported="false" />
         <activity
             android:name=".customer.CustomerSettingsActivity"
+            android:label="Settings"
             android:exported="false" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -34,7 +35,8 @@
         <activity
             android:name=".owner.customer_orders.CustomerOrdersActivity"
             android:exported="false"
-            android:parentActivityName=".owner.OwnerHomeActivity" />
+            android:label="@string/title_activity_customer_orders"
+            android:parentActivityName=".owner.store_manager.StoreManagerActivity" />
         <activity
             android:name=".owner.OwnerHomeActivity"
             android:exported="false"
