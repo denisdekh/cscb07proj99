@@ -62,7 +62,7 @@ public class CustomerOrdersActivity extends AppCompatActivity {
                             String customer = order.child("Customer").getValue(String.class);
                             String store = order.child("Store").getValue(String.class);
                             s+= "Customer: " + customer + " Store: " + store + "\n";
-                            for (DataSnapshot product: order.getChildren()){
+                            for (DataSnapshot product: order.child("cart").getChildren()){
                                 String productId = product.getKey();
                                 String frequency = product.getValue(String.class);
                                 s+= "   productId: " + productId+ " frequency: " + frequency + "\n";
