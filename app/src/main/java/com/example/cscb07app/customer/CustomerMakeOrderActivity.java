@@ -76,7 +76,7 @@ Order order;
         content.setOrientation(LinearLayout.VERTICAL);
         scroll.addView(content);
 
-        order = new Order("O3", username, id);
+        order = new Order(username, id);
         getProducts(this, content, id);
 
     }

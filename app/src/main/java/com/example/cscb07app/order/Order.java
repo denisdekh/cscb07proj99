@@ -1,27 +1,37 @@
 package com.example.cscb07app.order;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.example.cscb07app.customer.Customer;
 import com.example.cscb07app.product.Product;
 import com.example.cscb07app.store.Store;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
 public class Order {
     //Fields
-    HashMap<String, Integer> cart;
+    public HashMap<String, Integer> cart;
     //unordered pairs of the form (product id, amount)
-    String orderId; //Id of the order
-    String username; //Username of the customer who placed the order
-    String storeId; //Store the order was sent to
-    Boolean completed; //As the name suggests, true or false whether the order is ready for pickup.
+    public String orderId; //Id of the order
+    public String username; //Username of the customer who placed the order
+    public String storeId; //Store the order was sent to
+    public Boolean completed; //As the name suggests, true or false whether the order is ready for pickup.
 
     //Constructors
-    public Order(String orderId, String username, String storeId){
+
+    //TODO Make setting the order ID automatic, reading from the database to get the new ID
+    public Order(String username, String storeId){
         //initializes the HashMap
         cart = new HashMap<>();
-        this.orderId = orderId;
         this.username = username;
         this.storeId = storeId;
         this.completed = false;
@@ -108,6 +118,67 @@ public class Order {
     //the the orders section, where the orderId is the key to the order
     public void sendOrder(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("Orders").child(orderId).setValue(this);
+        Log.i("demo", "Made it to here");
+
+        //Set the id of the order when sending it, and update the number of orders in the database
+        ref.child("noOfOrders").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                if(task.getResult().getValue() == null){
+                    //This means that the current number of orders in the database is 0/the field
+                    //does not yet exist,
+
+                    //In this case we manually set the order count to be 1 and set the order id to be 1
+                    int orderCount = 0;
+                    String newOrderId = "o" + (orderCount + 1);
+
+                    //Increases the number of stores in the database
+                    ref.child("noOfOrders").setValue("" + (orderCount + 1));
+
+                    //Sends the order to the database
+                    setOrderId(newOrderId);
+                    Log.i("demo", "The order if for this order is: " + getOrderId());
+
+                    //Manually setting the entry on firebase
+                    ref.child("Orders").child(newOrderId).child("username").setValue(getUsername());
+                    ref.child("Orders").child(newOrderId).child("orderId").setValue(getOrderId());
+                    ref.child("Orders").child(newOrderId).child("storeId").setValue(getStoreId());
+                    ref.child("Orders").child(newOrderId).child("completed").setValue(getCompleted());
+
+                    //iterate through each item in the cart adding it to firebase
+                    for(String key: cart.keySet()){
+                        ref.child("Orders").child(newOrderId).child("cart").child(key).setValue(cart.get(key));
+                    }
+                } else {
+                    int orderCount = Integer.parseInt((String)task.getResult().getValue());
+
+                    //Creates the new order id
+                    String newOrderId = "o" + (orderCount + 1);
+
+                    //Increases the number of stores in the database
+                    ref.child("noOfOrders").setValue("" + (orderCount + 1));
+
+                    //Sends the order to the database
+                    setOrderId(newOrderId); //sets the orderId to be one higher than previous id
+                    Log.i("demo", "The order if for this order is: " + getOrderId());
+
+                    //Manually setting the entry on firebase
+                    ref.child("Orders").child(newOrderId).child("username").setValue(getUsername());
+                    ref.child("Orders").child(newOrderId).child("orderId").setValue(getOrderId());
+                    ref.child("Orders").child(newOrderId).child("storeId").setValue(getStoreId());
+                    ref.child("Orders").child(newOrderId).child("completed").setValue(getCompleted());
+
+                    //iterate through each item in the cart adding it to firebase
+                    for(String key: cart.keySet()){
+                        ref.child("Orders").child(newOrderId).child("cart").child(key).setValue(cart.get(key));
+                    }
+                }
+            }
+        });
+
+        //After coming out of the one time listener, our order Id is set according to the values
+        //in the database, and our order should have been sent as well
+
     }
 }
