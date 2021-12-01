@@ -38,9 +38,9 @@ public class LoginModel implements LoginContract.LoginModel {
                     if (data_password.equals(password)) {
                         view.valid();
                         view.displayMessage("You have logged in");
-                        Intent intent = new Intent((Context) view, OwnerHomeActivity.class);
+                        Intent intent = new Intent((Context)view, OwnerHomeActivity.class);
                         intent.putExtra(USERNAME, username);
-                        ((Context) view).startActivity(intent);
+                        ((Context)view).startActivity(intent);
                     } else {
                         view.invalid();
                         view.displayMessage("Incorrect Password");

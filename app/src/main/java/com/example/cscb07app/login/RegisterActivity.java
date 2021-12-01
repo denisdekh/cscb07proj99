@@ -65,17 +65,5 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
     public void RegisterButton(View view) {
         presenter = new RegisterPresenter(new RegisterModel(), this);
         presenter.checkAccount();
-
-
-        /*
-        if(getUserType().equals("Customer")) {
-            Intent intent = new Intent(this, CustomerHomeActivity.class);
-            intent.putExtra(USERNAME_MESSAGE, getUsername());
-            startActivity(intent);
-        } else if (getUserType().equals("Owner")) {
-            Intent intent = new Intent(this, OwnerHomeActivity.class);
-            intent.putExtra(USERNAME_MESSAGE, getUsername());
-            startActivity(intent);
-        } */
     }
 }

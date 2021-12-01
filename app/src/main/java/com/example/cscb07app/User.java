@@ -15,16 +15,16 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String name, String email) {
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username, String password, String email, String name) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
-    }
-
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
     }
 
     public String getUsername() {
@@ -74,8 +74,3 @@ public class User {
         return other.username.equals(this.username);
     }
 }
-    
-    
-
-
-
