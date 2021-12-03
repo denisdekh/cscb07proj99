@@ -67,8 +67,10 @@ public class OwnerHomeActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void displayAccountInformation(){
-        String infoText = String.format("Username: %s\n" +
-                                        "Role: Store Owner", presenter.getAccount().getUsername());
+        Owner tempAccount = presenter.getAccount();
+        String infoText = String.format("Username: %s\n" + "Name: %s\n" + "Email: %s\n" +
+                                        "Role: Store Owner", tempAccount.getUsername(),
+                                        tempAccount.getName(), tempAccount.getEmail());
         OwnerInfoTxtView.setText(infoText);
     }
 }

@@ -39,12 +39,16 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
     protected static final String EXTRA_STORE_NAME = "EXTRA_STORE_NAME";
     protected static final String EXTRA_STORE_DESCRIPTION = "EXTRA_STORE_DESCRIPTION";
     protected static final String EXTRA_ITEM_ID = "EXTRA_ITEM_ID";
+
     private String storeId;
     protected Store store;
+    private int lastItemIdNum;
+
     private Button editButton;
     private TextView textViewStoreName;
     private RecyclerView itemRecyclerView;
     private FloatingActionButton addItemFAB;
+
     private DatabaseReference storeRef;
 
     @Override
@@ -61,6 +65,8 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                lastItemIdNum = Integer.parseInt((String)snapshot.child("lastItemId").getValue());
+
                 String name = (String)snapshot.child("name").getValue();
                 String description = (String)snapshot.child("description").getValue();
                 store = new Store(storeId, name, description);
@@ -116,16 +122,12 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
         else if (viewId == addItemFAB.getId()){
             CreateNewItem();
         }
-        else if (viewId == R.id.confirmEditBut){
-
-        }
     }
 
     private void CreateNewItem(){
         // create a new itemId
-        /*TODO: an item being deleted causes the number of item changes, causing newItemId to be an existing id.
-        */
-        int newItemIdNumber = store.getItems().size() + 1;
+        int newItemIdNumber = lastItemIdNum + 1;
+        storeRef.child("lastItemId").setValue(""+newItemIdNumber);
         openEditItemInfo(("p"+newItemIdNumber));
     }
 
