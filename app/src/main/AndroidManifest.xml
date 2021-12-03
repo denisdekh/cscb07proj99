@@ -51,9 +51,6 @@
             android:label="@string/title_activity_owner_home"
             android:launchMode="singleTask" />
         <activity
-            android:name=".login.LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".login.RegisterActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
