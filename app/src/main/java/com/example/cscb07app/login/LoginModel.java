@@ -26,6 +26,7 @@ public class LoginModel implements LoginContract.LoginModel {
 
     @Override
     public void accountExists(String username, String password, LoginContract.View view) {
+        view.valid();
         ref_accounts.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -33,7 +34,7 @@ public class LoginModel implements LoginContract.LoginModel {
                 DataSnapshot customers_ref = snapshot.child("Customer");
                 String data_password;
                 //Checks if username exists under Owner in database
-                if (owners_ref.child(username).exists()) {
+                if (owners_ref.child(username).exists() && owners_ref.child(username).child("password").exists()) {
                     data_password = owners_ref.child(username).child("password").getValue().toString();
                     if (data_password.equals(password)) {
                         view.valid();
@@ -46,11 +47,11 @@ public class LoginModel implements LoginContract.LoginModel {
                         view.displayMessage("Incorrect Password");
                     }
                     //Checks if username exists under Customer in database
-                } else if (customers_ref.child(username).exists()) {
+                } else if (customers_ref.child(username).exists() && customers_ref.child(username).child("password").exists()) {
                     data_password = customers_ref.child(username).child("password").getValue().toString();
                     if (data_password.equals(password)) {
                         view.valid();
-                        view.displayMessage("You have been logged in");
+                        view.displayMessage("You have logged in");
                         Intent intent = new Intent((Context)view, CustomerHomeActivity.class);
                         intent.putExtra(USERNAME, username);
                         ((Context) view).startActivity(intent);

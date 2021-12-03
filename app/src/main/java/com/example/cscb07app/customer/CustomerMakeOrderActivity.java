@@ -50,7 +50,8 @@ Order order;
                 // User chose the "finish order" item
 
                 order.sendOrder();
-                Toast.makeText(this, "order has been sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Order successfully submitted", Toast.LENGTH_SHORT).show();
+                finish();
                 return true;
 
             default:
@@ -76,7 +77,7 @@ Order order;
         content.setOrientation(LinearLayout.VERTICAL);
         scroll.addView(content);
 
-        order = new Order("O3", username, id);
+        order = new Order(username, id);
         getProducts(this, content, id);
 
     }

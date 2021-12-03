@@ -12,18 +12,17 @@ public interface LoginContract {
     }
 
     public interface RegisterModel {
-        public void accountCreate(String username, String password, String usertype, LoginContract.View view);
+        public void accountCreate(String name, String email, String username, String password, String usertype, LoginContract.View view);
 
-        //boolean registered();
     }
 
     public interface RegisterPresenter {
         public void checkAccount();
-
-        //boolean registered();
     }
 
     public interface View {
+        public String getName();
+        public String getEmail();
         public String getUsername();
         public String getPassword();
         public String getUserType();
