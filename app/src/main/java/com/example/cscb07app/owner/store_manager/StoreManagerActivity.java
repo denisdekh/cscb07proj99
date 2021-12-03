@@ -10,6 +10,7 @@ import com.example.cscb07app.R;
 import com.example.cscb07app.owner.OwnerHomeActivity;
 import com.example.cscb07app.product.Product;
 import com.example.cscb07app.store.Store;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,21 +32,20 @@ import java.util.List;
 
 /* Require a Store class to hold store information. Note that Store methods and fields may change.*/
 
-/* TODO: Add dynamic, clickable Views that display item information.
-         Implement FAB to add new item.
-         Read and Write item information from and to the database.
-         update onResume to show changed store name (might not needed)*/
+/* TODO: Fix newItemId already exists. */
 
 public class StoreManagerActivity extends AppCompatActivity implements View.OnClickListener{
 
     protected static final String EXTRA_STORE_NAME = "EXTRA_STORE_NAME";
-    protected static final String EXTRA_sTORE_DESCRIPTION = "EXTRA_sTORE_DESCRIPTION";
-
+    protected static final String EXTRA_STORE_DESCRIPTION = "EXTRA_STORE_DESCRIPTION";
+    protected static final String EXTRA_ITEM_ID = "EXTRA_ITEM_ID";
     private String storeId;
     protected Store store;
     private Button editButton;
     private TextView textViewStoreName;
     private RecyclerView itemRecyclerView;
+    private FloatingActionButton addItemFAB;
+    private DatabaseReference storeRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
         this.storeId = intent.getStringExtra(OwnerHomeActivity.STORE_ID_EXTRA);
 
         // Retrieve Store information
-        DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("Stores").
+        storeRef = FirebaseDatabase.getInstance().getReference("Stores").
                 child(this.storeId);
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,14 +65,15 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
                 String description = (String)snapshot.child("description").getValue();
                 store = new Store(storeId, name, description);
 
-                // TODO: set up a list of item ids.
                 List<Product> tempProductList = new ArrayList<Product>();
                 for (DataSnapshot p: snapshot.child("items").getChildren()){
                     Product tempProduct = getProduct(p);
-                    if (tempProduct != null)
+                    if (tempProduct != null){
                         tempProductList.add(tempProduct);
+                    }
                 }
                 store.setItems(tempProductList);
+                // Log.i("testCount", String.valueOf(tempProductList.size()));
                 displayStoreName();
                 setItemRecyclerAdapter();
             }
@@ -86,7 +87,9 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
         editButton = (Button)findViewById(R.id.EditStoreNameBut);
         textViewStoreName = (TextView)findViewById(R.id.TextViewStoreName);
         itemRecyclerView = (RecyclerView)findViewById(R.id.ItemListRecyclerView);
+        addItemFAB = (FloatingActionButton)findViewById(R.id.addItemFAB);
         editButton.setOnClickListener(this);
+        addItemFAB.setOnClickListener(this);
     }
 
     protected Product getProduct(DataSnapshot snap){
@@ -97,7 +100,7 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
     }
 
     protected void setItemRecyclerAdapter() {
-        ItemRecyclerAdapter adapter = new ItemRecyclerAdapter(store.getItems());
+        ItemRecyclerAdapter adapter = new ItemRecyclerAdapter(store.getItems(), this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         this.itemRecyclerView.setLayoutManager(layoutManager);
         this.itemRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -110,9 +113,23 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
         if (viewId == editButton.getId()){
             openEditStoreInfo();
         }
+        else if (viewId == addItemFAB.getId()){
+            CreateNewItem();
+        }
+        else if (viewId == R.id.confirmEditBut){
+
+        }
     }
 
-    private void openEditStoreInfo(){
+    private void CreateNewItem(){
+        // create a new itemId
+        /*TODO: an item being deleted causes the number of item changes, causing newItemId to be an existing id.
+        */
+        int newItemIdNumber = store.getItems().size() + 1;
+        openEditItemInfo(("p"+newItemIdNumber));
+    }
+
+    protected void openEditStoreInfo(){
         String extraName = "";
         String extraDescription = "";
 
@@ -123,8 +140,18 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
 
         Intent openActivity = new Intent(this, EditStoreInfoActivity.class);
         openActivity.putExtra(EXTRA_STORE_NAME, extraName);
-        openActivity.putExtra(EXTRA_sTORE_DESCRIPTION, extraDescription);
+        openActivity.putExtra(EXTRA_STORE_DESCRIPTION, extraDescription);
         openActivity.putExtra(OwnerHomeActivity.STORE_ID_EXTRA, this.storeId);
+        startActivity(openActivity);
+    }
+
+    protected void openEditItemInfo(String itemId){
+        /* open EditItemActivity to make edit at the given itemId
+        if the itemId does not exists, create a new item instead.
+         */
+        Intent openActivity = new Intent(this, EditItemActivity.class);
+        openActivity.putExtra(OwnerHomeActivity.STORE_ID_EXTRA, this.storeId);
+        openActivity.putExtra(EXTRA_ITEM_ID, itemId);
         startActivity(openActivity);
     }
 

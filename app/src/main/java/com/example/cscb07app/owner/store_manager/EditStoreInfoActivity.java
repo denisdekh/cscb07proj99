@@ -31,7 +31,7 @@ public class EditStoreInfoActivity extends AppCompatActivity {
         editTextName = (EditText)findViewById(R.id.editTextStoreName);
         editTextDescription = (EditText)findViewById(R.id.editTextStoreDescription);
         editTextName.setText(intent.getStringExtra(StoreManagerActivity.EXTRA_STORE_NAME), TextView.BufferType.EDITABLE);
-        editTextDescription.setText(intent.getStringExtra(StoreManagerActivity.EXTRA_sTORE_DESCRIPTION), TextView.BufferType.EDITABLE);
+        editTextDescription.setText(intent.getStringExtra(StoreManagerActivity.EXTRA_STORE_DESCRIPTION), TextView.BufferType.EDITABLE);
 
         storeId = intent.getStringExtra(OwnerHomeActivity.STORE_ID_EXTRA);
     }
@@ -40,13 +40,19 @@ public class EditStoreInfoActivity extends AppCompatActivity {
     public void updateStoreInformation(View v){
         String newName = this.editTextName.getText().toString();
         String newDescription = this.editTextDescription.getText().toString();
+        if (newName.equals("")){
+            Toast.makeText(this, "You cannot have an empty store name", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            // write the new data to database
+            DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("Stores").
+                    child(this.storeId);
 
-        // write the new data to database
-        DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("Stores").
-                child(this.storeId);
-        storeRef.child("name").setValue(newName);
-        storeRef.child("description").setValue(newDescription);
 
-        Toast.makeText(this, "Edit Successful!", Toast.LENGTH_SHORT).show();
+            storeRef.child("name").setValue(newName);
+            storeRef.child("description").setValue(newDescription);
+
+            Toast.makeText(this, "Edit Successful!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
