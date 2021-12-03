@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cscb07app.R;
 import com.example.cscb07app.owner.OwnerHomeActivity;
 import com.example.cscb07app.product.Product;
+import com.google.android.gms.common.util.NumberUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -90,15 +91,17 @@ public class EditItemActivity extends AppCompatActivity implements View.OnClickL
 
     private void editItem(){
         String name = itemName.getText().toString();
-        if (name.equals("")){
+
+        if (!(itemPrice.getText().toString().matches("[0-9]+[\\.]?[0-9]*"))){
+            Toast.makeText(this, "You must enter a number for item price", Toast.LENGTH_SHORT).show();
+        }
+
+        else if (name.equals("")){
             Toast.makeText(this, "You cannot leave the name blank", Toast.LENGTH_SHORT).show();
         }
         else{
+            double price = Double.parseDouble(itemPrice.getText().toString());
             String brand = itemBrand.getText().toString();
-            double price = 0;
-            if (!(itemPrice.getText().toString().equals(""))){
-                price = Double.parseDouble(itemPrice.getText().toString());
-            }
             String description = itemDesc.getText().toString();
 
             this.storeItemRef.child(itemId).setValue(new Product(itemId, name, brand, description, price));

@@ -62,6 +62,7 @@ public class OwnerHomeModel implements OwnerHomeContract.Model{
                 ref.child("Stores").child(newStoreId).setValue(newStore);
                 ref.child("Stores").child(newStoreId).child("items").setValue("");
                 ref.child("Stores").child(newStoreId).child("orders").setValue("");
+                ref.child("Stores").child(newStoreId).child("lastItemId").setValue("0");
 
                 // update Owner's storeId
                 ref.child("Account").child("Owner").child(presenter.getAccount().getUsername()).child("storeId").setValue(newStoreId);

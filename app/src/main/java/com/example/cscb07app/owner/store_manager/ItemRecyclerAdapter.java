@@ -49,7 +49,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.i("testPosition", String.valueOf(position));
+        // Log.i("testPosition", String.valueOf(position));
         Product p = productList.get(position);
         holder.name.setText(p.getName());
         holder.price.setText(("$"+p.getPrice()));
