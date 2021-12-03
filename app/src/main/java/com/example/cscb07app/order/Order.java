@@ -166,6 +166,9 @@ public class Order {
                     ref.child("Orders").child(newOrderId).child("storeId").setValue(getStoreId());
                     ref.child("Orders").child(newOrderId).child("completed").setValue(getCompleted());
 
+                    //adding the order to the stores list of orders
+                    ref.child("Stores").child(storeId).child("orders").child(newOrderId).setValue("a");
+
                     //iterate through each item in the cart adding it to firebase
                     for(String key: cart.keySet()){
                         ref.child("Orders").child(newOrderId).child("cart").child(key).setValue(cart.get(key));
