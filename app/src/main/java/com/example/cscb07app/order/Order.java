@@ -28,7 +28,6 @@ public class Order {
 
     //Constructors
 
-    //TODO Make setting the order ID automatic, reading from the database to get the new ID
     public Order(String username, String storeId){
         //initializes the HashMap
         cart = new HashMap<>();
@@ -114,6 +113,13 @@ public class Order {
         this.completed = completed;
     }
 
+    //TODO read from the database and return an integer representing the cost of the cart based on
+    //TODO the store ID and the prices of the items within the store
+    //public int getTotal(){
+    //    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    //    return 0;
+    //}
+
     //Generates a reference to the firebase database and sends the order to the database under
     //the the orders section, where the orderId is the key to the order
     public void sendOrder(){
@@ -143,6 +149,9 @@ public class Order {
                     ref.child("Orders").child(newOrderId).child("orderId").setValue(getOrderId());
                     ref.child("Orders").child(newOrderId).child("storeId").setValue(getStoreId());
                     ref.child("Orders").child(newOrderId).child("completed").setValue(getCompleted());
+
+                    //adding the order to the stores list of orders
+                    ref.child("Stores").child(storeId).child("orders").child(newOrderId).setValue("a");
 
                     //iterate through each item in the cart adding it to firebase
                     for(String key: cart.keySet()){
