@@ -17,6 +17,11 @@ public class Product {
         this.price = price;
     }
 
+    // No argument constructor for firebase
+    public Product(){
+
+    }
+
     //Methods
     public String getId() {
         return id;

@@ -10,14 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cscb07app">
         <activity
+            android:name=".owner.store_manager.EditItemActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".owner.store_manager.StoreManagerActivity" />
+        </activity>
+        <activity
             android:name=".owner.store_manager.EditStoreInfoActivity"
             android:parentActivityName=".owner.store_manager.StoreManagerActivity"
             android:label="@string/title_activity_edit_store_info"
             android:exported="false" />
         <activity
             android:name=".customer.CustomerSettingsActivity"
-            android:label="Settings"
-            android:exported="false" >
+            android:exported="false"
+            android:label="Settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".customer.CustomerHomeActivity" />
@@ -31,6 +38,7 @@
             android:name=".owner.store_manager.StoreManagerActivity"
             android:exported="false"
             android:label="@string/title_activity_store_manager"
+            android:launchMode="singleTask"
             android:parentActivityName=".owner.OwnerHomeActivity" />
         <activity
             android:name=".owner.customer_orders.CustomerOrdersActivity"
@@ -42,7 +50,9 @@
             android:exported="false"
             android:label="@string/title_activity_owner_home"
             android:launchMode="singleTask" />
-
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".login.RegisterActivity"
             android:exported="false"
@@ -58,14 +68,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".customer.CustomerMakeOrderActivity"
             android:exported="false"
-            android:label="@string/title_activity_customer_make_order" >
+            android:label="@string/title_activity_customer_make_order">
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".customer.CustomerHomeActivity" />
-            </activity>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".customer.CustomerHomeActivity" />
+        </activity>
     </application>
 </manifest>

@@ -74,8 +74,3 @@ public class User {
         return other.username.equals(this.username);
     }
 }
-    
-    
-
-
-
