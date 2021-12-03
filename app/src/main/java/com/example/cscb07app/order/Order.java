@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Order {
@@ -25,6 +26,8 @@ public class Order {
     public String username; //Username of the customer who placed the order
     public String storeId; //Store the order was sent to
     public Boolean completed; //As the name suggests, true or false whether the order is ready for pickup.
+
+    public double totalCost;
 
     //Constructors
 
@@ -113,12 +116,43 @@ public class Order {
         this.completed = completed;
     }
 
+    public double getTotalCost(){
+        return totalCost;
+    }
+    public void setTotalCost(double totalCost){
+        this.totalCost = totalCost;
+    }
+
     //TODO read from the database and return an integer representing the cost of the cart based on
     //TODO the store ID and the prices of the items within the store
-    //public int getTotal(){
-    //    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    //    return 0;
-    //}
+    public void calcTotal(){
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        //we are going to take a one time look at the database and grab the necessary information
+        //each item in the cart should be coming from the same store, and so we can look at that one store for prices.
+        //for each item in the cart we will get the corresponding price, multiply it by the quantity of items in the cart...
+        //and add that to the total variable.
+
+        ref.child("Stores").child(storeId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.getResult().getValue() == null){
+                    //the store does not exist.
+                    Log.i("demo", "Store does not exist");
+                } else {
+                    //for each product id in the cart
+                    double total = 0.00;
+                    for(String key: cart.keySet()){
+                        //cost of the item in the cart multiplied by the frequency of the item in the cart
+
+                        total += Double.parseDouble(task.getResult().child("items").child(key).child("price").getValue().toString()) * cart.get(key);
+                    }
+                    setTotalCost(Math.round(total * 100)/100.0);
+                }
+            }
+        });
+    }
 
     //Generates a reference to the firebase database and sends the order to the database under
     //the the orders section, where the orderId is the key to the order
