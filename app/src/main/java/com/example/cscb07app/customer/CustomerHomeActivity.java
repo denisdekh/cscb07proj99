@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class CustomerHomeActivity extends AppCompatActivity {
     ArrayList<Store> stores = new ArrayList<Store>();
     final public static String STORE_ID = "com.example.app.STOREID";
+    String username;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,7 +48,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
             case R.id.action_settings:
                 // User chose the "Settings" item
                 Intent intent = getIntent();
-                String username = intent.getStringExtra(LoginModel.USERNAME);
+                username = intent.getStringExtra(LoginModel.USERNAME);
                 Intent intent2 = new Intent(this, CustomerSettingsActivity.class);
                 intent2.putExtra("USERNAME", username);
                 startActivity(intent2);
@@ -66,7 +67,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home);
         Intent intent = getIntent();
-        String username = intent.getStringExtra(LoginModel.USERNAME);
+        username = intent.getStringExtra(LoginModel.USERNAME);
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         ScrollView scroll = new ScrollView(this);
@@ -128,6 +129,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 // Code to open the store's page
                 Intent intent = new Intent(context, CustomerMakeOrderActivity.class);
                 intent.putExtra(STORE_ID, id);
+                intent.putExtra(LoginModel.USERNAME, username);
                 startActivity(intent);
             }
         });
