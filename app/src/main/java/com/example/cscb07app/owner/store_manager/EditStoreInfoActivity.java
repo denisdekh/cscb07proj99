@@ -53,6 +53,7 @@ public class EditStoreInfoActivity extends AppCompatActivity {
             storeRef.child("description").setValue(newDescription);
 
             Toast.makeText(this, "Edit Successful!", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 }

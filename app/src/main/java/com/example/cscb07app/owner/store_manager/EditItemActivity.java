@@ -91,26 +91,28 @@ public class EditItemActivity extends AppCompatActivity implements View.OnClickL
 
     private void editItem(){
         String name = itemName.getText().toString();
+        String brand = itemBrand.getText().toString();
+        String description = itemDesc.getText().toString();
 
-        if (!(itemPrice.getText().toString().matches("[0-9]+[\\.]?[0-9]*"))){
-            Toast.makeText(this, "You must enter a number for item price", Toast.LENGTH_SHORT).show();
+        if (name.equals("") || brand.equals("") || description.equals("")){
+            Toast.makeText(this, "You cannot leave the any fields blank", Toast.LENGTH_SHORT).show();
         }
 
-        else if (name.equals("")){
-            Toast.makeText(this, "You cannot leave the name blank", Toast.LENGTH_SHORT).show();
+        else if (!(itemPrice.getText().toString().matches("[0-9]+[\\.]?[0-9]*"))){
+            Toast.makeText(this, "You must enter a number for item price", Toast.LENGTH_SHORT).show();
         }
         else{
             double price = Double.parseDouble(itemPrice.getText().toString());
-            String brand = itemBrand.getText().toString();
-            String description = itemDesc.getText().toString();
 
             this.storeItemRef.child(itemId).setValue(new Product(itemId, name, brand, description, price));
             Toast.makeText(this, "Item Successfully updated", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
     private void deleteItem(){
         this.storeItemRef.child(itemId).setValue(null);
         Toast.makeText(this, "Item Successfully deleted.", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
