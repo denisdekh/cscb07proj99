@@ -1,12 +1,16 @@
 package com.example.cscb07app.owner.customer_orders;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cscb07app.R;
@@ -33,11 +37,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.orderIdtext.setText(orderIds.get(position));
-        holder.customertext.setText(customers.get(position));
-        holder.completedtext.setText(completed.get(position));
-        holder.productsInfotext.setText(productsInfo.get(position));
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.orderIdtext.setText("Order Id: " +orderIds.get(position));
+        holder.customertext.setText("Customer: "+customers.get(position));
+        holder.completedtext.setText("Completed: "+completed.get(position));
+        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ViewCartActivity.class);
+                intent.putExtra("Cart",productsInfo.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -47,6 +58,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView orderIdtext,customertext,completedtext,productsInfotext;
+        ConstraintLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +66,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             customertext = itemView.findViewById(R.id.customer1);
             completedtext = itemView.findViewById(R.id.completed);
             productsInfotext = itemView.findViewById(R.id.productsInfo1);
+            mainLayout = itemView.findViewById(R.id.mainLayout);
         }
+
     }
 }
