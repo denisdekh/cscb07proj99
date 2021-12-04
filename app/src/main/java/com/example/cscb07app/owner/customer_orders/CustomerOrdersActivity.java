@@ -2,6 +2,9 @@ package com.example.cscb07app.owner.customer_orders;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.cscb07app.R;
 import com.example.cscb07app.owner.OwnerHomeActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -12,17 +15,43 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CustomerOrdersActivity extends AppCompatActivity {
-
+    ArrayList<String> orderIds,customers,productsInfo,completed;
     private String storeId;
     private ArrayList<String> orders;
     String s = "";
+    RecyclerView recyclerView;
 
-    private void setText(TextView t,String s){
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        orderIds = new ArrayList<String>();
+        customers = new ArrayList<String>();
+        productsInfo = new ArrayList<String>();
+        completed = new ArrayList<String>();
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_customer_orders);
+        Intent intent = getIntent();
+        this.storeId = intent.getStringExtra(OwnerHomeActivity.STORE_ID_EXTRA);
+        recyclerView = findViewById(R.id.customerOrdersRecyclerView);
+        orderIds.add("hello");
+        customers.add("hello");
+        productsInfo.add("hello");
+        completed.add("true");
+        MyAdapter myAdapter = new MyAdapter(this, orderIds,customers,completed,productsInfo);
+        recyclerView.setAdapter(myAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+
+
+    /*private void setText(TextView t,String s){
         t.setText(s);
     }
 
@@ -32,6 +61,7 @@ public class CustomerOrdersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         orders = new ArrayList<String>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders);
@@ -91,4 +121,6 @@ public class CustomerOrdersActivity extends AppCompatActivity {
 
 
     }
+
+     */
 }

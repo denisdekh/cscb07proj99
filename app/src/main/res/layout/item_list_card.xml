@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ItemCardLayout"
+    android:id="@+id/OrderCardLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layout_bg"
     android:maxHeight="140sp">
 
     <TextView
-        android:id="@+id/ItemNameTextViewCard"
+        android:id="@+id/orderId"
         android:layout_width="273dp"
         android:layout_height="29dp"
         android:layout_marginStart="16dp"
@@ -31,17 +31,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ItemBrandTextViewCard"
+        android:id="@+id/customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ItemNameTextViewCard" />
+        app:layout_constraintTop_toBottomOf="@+id/orderId" />
 
     <TextView
-        android:id="@+id/ItemDescriptionTextViewCard"
+        android:id="@+id/productsinfo"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
@@ -50,5 +50,5 @@
         android:textAlignment="viewStart"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ItemBrandTextViewCard" />
+        app:layout_constraintTop_toBottomOf="@+id/customer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

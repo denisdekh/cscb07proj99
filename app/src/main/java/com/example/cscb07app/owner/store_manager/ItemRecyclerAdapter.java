@@ -32,11 +32,11 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.ItemNameTextViewCard);
+            name = (TextView) itemView.findViewById(R.id.orderId);
             price = (TextView) itemView.findViewById(R.id.ItemPriceTextViewCard);
-            description = (TextView) itemView.findViewById(R.id.ItemDescriptionTextViewCard);
-            brand = (TextView) itemView.findViewById(R.id.ItemBrandTextViewCard);
-            layout = itemView.findViewById(R.id.ItemCardLayout);
+            description = (TextView) itemView.findViewById(R.id.productsinfo);
+            brand = (TextView) itemView.findViewById(R.id.customer);
+            layout = itemView.findViewById(R.id.OrderCardLayout);
         }
     }
 
