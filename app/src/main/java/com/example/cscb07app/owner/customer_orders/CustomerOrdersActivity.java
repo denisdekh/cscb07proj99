@@ -40,14 +40,12 @@ public class CustomerOrdersActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.storeId = intent.getStringExtra(OwnerHomeActivity.STORE_ID_EXTRA);
         recyclerView = findViewById(R.id.customerOrdersRecyclerView);
-        orderIds.add("hello");
-        customers.add("hello");
-        productsInfo.add("hello");
-        completed.add("true");
         MyAdapter myAdapter = new MyAdapter(this, orderIds,customers,completed,productsInfo);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+
 
 
 
