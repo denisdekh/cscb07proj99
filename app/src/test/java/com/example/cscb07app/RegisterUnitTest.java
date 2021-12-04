@@ -35,10 +35,14 @@ public class RegisterUnitTest {
     @Mock
     RegisterModel model;
 
+    @Mock
+    RegisterPresenter presenter_mock;
+
     @Test
     public void testPresenterValidValues() {
         when(view.getUsername()).thenReturn("UnitTest1");
         when(view.getPassword()).thenReturn("test1password");
+        when(view.getConfirmPassword()).thenReturn("test1password");
         when(view.getEmail()).thenReturn("test@gmail.com");
         when(view.getName()).thenReturn("test");
         when(view.getUserType()).thenReturn("Customer");
@@ -61,7 +65,21 @@ public class RegisterUnitTest {
         RegisterPresenter presenter = new RegisterPresenter(model, view);
         presenter.checkAccount();
 
-        verify(view).displayMessage("Username field is empty");
+        verify(view).displayMessage("Not a valid username", "username");
+    }
+
+    @Test
+    public void testPresenterInvalidUsername() {
+        when(view.getUsername()).thenReturn("@#asd231@");
+        when(view.getPassword()).thenReturn("test1password");
+        when(view.getEmail()).thenReturn("test@gmail.com");
+        when(view.getName()).thenReturn("test");
+        when(view.getUserType()).thenReturn("Customer");
+
+        RegisterPresenter presenter = new RegisterPresenter(model, view);
+        presenter.checkAccount();
+
+        verify(view).displayMessage("Not a valid username", "username");
     }
 
     @Test
@@ -75,7 +93,36 @@ public class RegisterUnitTest {
         RegisterPresenter presenter = new RegisterPresenter(model, view);
         presenter.checkAccount();
 
-        verify(view).displayMessage("Password field is empty");
+        verify(view).displayMessage("Not a valid password", "password");
+    }
+
+    @Test
+    public void testPresenterInvalidPassword() {
+        when(view.getUsername()).thenReturn("testusername");
+        when(view.getPassword()).thenReturn("a");
+        when(view.getEmail()).thenReturn("test@gmail.com");
+        when(view.getName()).thenReturn("test");
+        when(view.getUserType()).thenReturn("Customer");
+
+        RegisterPresenter presenter = new RegisterPresenter(model, view);
+        presenter.checkAccount();
+
+        verify(view).displayMessage("Not a valid password", "password");
+    }
+
+    @Test
+    public void testPresenterPasswordNotEqual() {
+        when(view.getUsername()).thenReturn("testusername");
+        when(view.getPassword()).thenReturn("test1");
+        when(view.getConfirmPassword()).thenReturn("test2");
+        when(view.getEmail()).thenReturn("test@gmail.com");
+        when(view.getName()).thenReturn("test");
+        when(view.getUserType()).thenReturn("Customer");
+
+        RegisterPresenter presenter = new RegisterPresenter(model, view);
+        presenter.checkAccount();
+
+        verify(view).displayMessage("Passwords do not match", "password");
     }
 
     @Test
@@ -89,7 +136,21 @@ public class RegisterUnitTest {
         RegisterPresenter presenter = new RegisterPresenter(model, view);
         presenter.checkAccount();
 
-        verify(view).displayMessage("Name field is empty");
+        verify(view).displayMessage("Not a valid name", "name");
+    }
+
+    @Test
+    public void testPresenterInvalidName() {
+        when(view.getUsername()).thenReturn("testusername");
+        when(view.getPassword()).thenReturn("test1password");
+        when(view.getEmail()).thenReturn("test@gmail.com");
+        when(view.getName()).thenReturn("@#asd12@#");
+        when(view.getUserType()).thenReturn("Customer");
+
+        RegisterPresenter presenter = new RegisterPresenter(model, view);
+        presenter.checkAccount();
+
+        verify(view).displayMessage("Not a valid name", "name");
     }
 
     @Test
@@ -103,6 +164,20 @@ public class RegisterUnitTest {
         RegisterPresenter presenter = new RegisterPresenter(model, view);
         presenter.checkAccount();
 
-        verify(view).displayMessage("Email field is empty");
+        verify(view).displayMessage("Not a valid email", "email");
+    }
+
+    @Test
+    public void testPresenterInvalidEmail() {
+        when(view.getUsername()).thenReturn("testusername");
+        when(view.getPassword()).thenReturn("test1password");
+        when(view.getEmail()).thenReturn("123123.com");
+        when(view.getName()).thenReturn("test");
+        when(view.getUserType()).thenReturn("Customer");
+
+        RegisterPresenter presenter = new RegisterPresenter(model, view);
+        presenter.checkAccount();
+
+        verify(view).displayMessage("Not a valid email", "email");
     }
 }
