@@ -44,13 +44,11 @@ public class RegisterModel implements LoginContract.RegisterModel {
                             ref_accounts.child("Customer").child(username).child("username").setValue(username);
                             ref_accounts.child("Customer").child(username).child("password").setValue(password);
                         }
-                        view.valid();
                         view.displayMessage("Your account has been created");
                         Intent intent = new Intent((Context) view, LoginActivity.class);
                         ((Context) view).startActivity(intent);
                 } else {
-                    view.invalid();
-                    view.displayMessage("The username already exists");
+                    view.displayMessage("The username already exists", "username");
                 }
             }
 
