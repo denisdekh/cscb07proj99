@@ -42,5 +42,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_customer_make_order">Create an order</string>
     <string name="title_activity_customer_orders">Customer Orders</string>
+    <string name ="title_activity_view_cart">Cart</string>
 
 </resources>
