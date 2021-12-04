@@ -33,6 +33,25 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    public void displayMessage(String message, String type) {
+        if (type.equals("name")) {
+            EditText nameTextEdit = findViewById(R.id.name);
+            nameTextEdit.setError(message);
+        }
+        else if (type.equals("email")) {
+            EditText emailTextEdit = findViewById(R.id.email);
+            emailTextEdit.setError(message);
+        }
+        else if (type.equals("username")) {
+            EditText usernameTextEdit = findViewById(R.id.username);
+            usernameTextEdit.setError(message);
+        }
+        else {
+            EditText passwordTextEdit = findViewById(R.id.password);
+            passwordTextEdit.setError(message);
+        }
+    }
+
     public String getUsername() {
         EditText usernameTextEdit = findViewById(R.id.username);
         return usernameTextEdit.getText().toString();
@@ -53,18 +72,14 @@ public class RegisterActivity extends AppCompatActivity implements LoginContract
         return passwordTextEdit.getText().toString();
     }
 
+    public String getConfirmPassword() {
+        EditText passwordTextEdit = findViewById(R.id.confirmpassword);
+        return passwordTextEdit.getText().toString();
+    }
+
     public String getUserType() {
         Spinner usertypeTextEdit = findViewById(R.id.user);
         return usertypeTextEdit.getSelectedItem().toString();
-    }
-
-    //Dummy function for mockito testing
-    public void valid() {
-
-    }
-    //Dummy function for mockito testing
-    public void invalid() {
-
     }
 
     public void toSignInButton(View view) {

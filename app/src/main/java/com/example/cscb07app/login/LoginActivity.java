@@ -28,6 +28,16 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    public void displayMessage(String message, String type) {
+        if (type.equals("username")) {
+            EditText usernameTextEdit = findViewById(R.id.username);
+            usernameTextEdit.setError(message);
+        } else {
+            EditText passwordTextEdit = findViewById(R.id.password);
+            passwordTextEdit.setError(message);
+        }
+    }
+
     public String getUsername() {
         EditText usernameTextEdit = findViewById(R.id.username);
         return usernameTextEdit.getText().toString();
@@ -46,14 +56,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         return "";
     }
 
-    //Dummy function for mockito testing
-    public void valid() {
-
-    }
-    //Dummy function for mockito testing
-    public void invalid() {
-
-    }
+    public String getConfirmPassword() { return "";}
 
     public String getUserType() {
         return "";

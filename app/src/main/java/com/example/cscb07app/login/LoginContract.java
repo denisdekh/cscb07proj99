@@ -2,32 +2,32 @@ package com.example.cscb07app.login;
 
 public interface LoginContract {
 
-    public interface LoginModel {
-        public void accountExists(String username, String password, LoginContract.View view);
+    interface LoginModel {
+        void accountExists(String username, String password, LoginContract.View view);
 
     }
 
-    public interface LoginPresenter {
-        public void checkAccount();
+    interface LoginPresenter {
+        void checkAccount();
     }
 
-    public interface RegisterModel {
-        public void accountCreate(String name, String email, String username, String password, String usertype, LoginContract.View view);
+    interface RegisterModel {
+        void accountCreate(String name, String email, String username, String password, String usertype, LoginContract.View view);
 
     }
 
-    public interface RegisterPresenter {
-        public void checkAccount();
+    interface RegisterPresenter {
+        void checkAccount();
     }
 
-    public interface View {
-        public String getName();
-        public String getEmail();
-        public String getUsername();
-        public String getPassword();
-        public String getUserType();
-        public void valid();
-        public void invalid();
-        public void displayMessage(String message);
+    interface View {
+        String getName();
+        String getEmail();
+        String getUsername();
+        String getPassword();
+        String getUserType();
+        String getConfirmPassword();
+        void displayMessage(String message);
+        void displayMessage(String message, String type);
     }
 }
