@@ -23,8 +23,8 @@ import java.util.ArrayList;
 
 public class CustomerOrdersActivity extends AppCompatActivity {
     ArrayList<String> orderIds,customers,productsInfo,completed;
+    ArrayList<ArrayList<String>> listproductIds,listproductFrequencys;
     private String storeId;
-    private ArrayList<String> orders;
     String s = "";
     RecyclerView recyclerView;
 
@@ -34,16 +34,137 @@ public class CustomerOrdersActivity extends AppCompatActivity {
         customers = new ArrayList<String>();
         productsInfo = new ArrayList<String>();
         completed = new ArrayList<String>();
+        listproductIds = new ArrayList<ArrayList<String>>();
+        listproductFrequencys= new ArrayList<ArrayList<String>>();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders);
         Intent intent = getIntent();
         this.storeId = intent.getStringExtra(OwnerHomeActivity.STORE_ID_EXTRA);
         recyclerView = findViewById(R.id.customerOrdersRecyclerView);
-//        MyAdapter myAdapter = new MyAdapter(this, orderIds,customers,completed,productsInfo);
-//        recyclerView.setAdapter(myAdapter);
+        /*makeOrderIds();
+        makeCustomersCompletedlistProducts();
+        makeProductInfo();
+        */
+        MyAdapter myAdapter = new MyAdapter(this, orderIds,customers,completed,productsInfo);
+        recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+    /*
+
+    private void addToArrayList(ArrayList<String> a,String s){
+        a.add(s);
+    }
+
+    private void addArrayListtoArrayList(ArrayList<ArrayList<String>> a, ArrayList<String> s){
+        a.add(s);
+    }
+
+    void makeOrderIds() {
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = rootRef.child("Stores");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot store : snapshot.getChildren()) {
+                    if (store.getKey().equals(storeId)) {
+                        for (DataSnapshot order : store.child("orders").getChildren()) {
+                            addToArrayList(orderIds, order.child("orderId").getValue(String.class));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    void makeCustomersCompletedlistProducts(){
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference orders_ref = rootRef.child("Orders");
+
+        orders_ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot order: snapshot.getChildren()){
+                    for (int i = 0;i<orderIds.size();i++){
+                        if (orderIds.get(i).equals(order.getKey())){
+                            String customer = order.child("username").getValue(String.class);
+                            String completed1 = order.child("completed").getValue(String.class);
+
+                            addToArrayList(completed,"Completed: " + completed1);
+                            addToArrayList(customers,"Customer: "+customer);
+                            ArrayList<String> productIds = new ArrayList<String>();
+                            ArrayList<String> frequencies = new ArrayList<String>();
+                            for (DataSnapshot product: order.child("cart").getChildren()){
+
+                                String productId = product.getKey();
+                                String frequency = product.getValue(String.class);
+                                addToArrayList(productIds,productId);
+                                addToArrayList(frequencies,frequency);
+
+                            }
+                            addArrayListtoArrayList(listproductIds,productIds);
+                            addArrayListtoArrayList(listproductFrequencys,frequencies);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    void makeProductInfo(){
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = rootRef.child("Stores");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot store : snapshot.getChildren()) {
+                    if (store.getKey().equals(storeId)) {
+                        for (int i = 0;i<orderIds.size();i++){
+                            String s = "";
+                            ArrayList<String> products_list = listproductIds.get(i);
+                            ArrayList<String> product_frequencies = listproductFrequencys.get(i);
+                            for(DataSnapshot product: store.child("items").getChildren()){
+                                String id = product.getKey();
+                                for (int j = 0;j<products_list.size();i++){
+                                    if (id.equals(products_list.get(j)) ){
+                                        String frequency = product_frequencies.get(j);
+                                        s+= "Product Id: " + id + "Frequency: " + frequency + "\n";
+                                    }
+                                }
+                                String product_name = product.child("name").getValue(String.class);
+                                String product_brand = product.child("brand").getValue(String.class);
+                                String product_price = product.child("price").getValue(String.class);
+                                String product_description = product.child("description").getValue(String.class);
+                                s+= "   Name: " + product_name + "\n";
+                                s+= "   Brand: " + product_brand + "\n";
+                                s+= "   Price: " + product_price + "\n";
+                                s+= "   Description: " + product_description + "\n";
+
+                            }
+
+                        }
+                        addToArrayList(productsInfo,s);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+*/
 
 
 
