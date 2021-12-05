@@ -22,7 +22,7 @@
     <string name="new_password">New Password:</string>
     <string name="change_password">Change Password</string>
     <string name="AccountInformationButtonDisplay">Account Information</string>
-    <string name="censoredPassword">Click to Display Password</string>
+    <string name="censoredPassword">Click here to display</string>
     <string name="yourinformation"> <font fg="#00000000"><u>Your Information</u></font></string>
     <string-array name="users">
         <item>Owner</item>
