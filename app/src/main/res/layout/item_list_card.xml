@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layout_bg"
-    android:maxHeight="140sp">
+    android:maxHeight="140sp"
+    android:layout_marginBottom="4dp">
 
     <TextView
         android:id="@+id/ItemNameTextViewCard"

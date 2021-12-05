@@ -51,9 +51,11 @@ public class OwnerHomeActivity extends AppCompatActivity implements View.OnClick
         OwnerInfoTxtView = findViewById(R.id.OwnerInfoTextView);
         View CustomerOrdersBut = findViewById(R.id.CustomerOrdersBut);
         View StoreManagerBut = findViewById(R.id.StoreManagerBut);
+        View OwnerLogoutBut = findViewById(R.id.OwnerLogoutBut);
 
         CustomerOrdersBut.setOnClickListener(this);
         StoreManagerBut.setOnClickListener(this);
+        OwnerLogoutBut.setOnClickListener(this);
     }
 
     @Override
@@ -63,6 +65,8 @@ public class OwnerHomeActivity extends AppCompatActivity implements View.OnClick
             presenter.openStoreManager(this);
         else if (buttonId == R.id.CustomerOrdersBut)
             presenter.openCustomerOrders(this);
+        else
+            presenter.logout(this);
     }
 
     @Override
