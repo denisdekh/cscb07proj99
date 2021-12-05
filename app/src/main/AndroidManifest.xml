@@ -12,7 +12,7 @@
         <activity
             android:name=".owner.customer_orders.ViewCartActivity"
             android:exported="false"
-            android:parentActivityName=".owner.store_manager.StoreManagerActivity"
+            android:parentActivityName=".owner.customer_orders.CustomerOrdersActivity"
             android:label = "@string/title_activity_view_cart"/>
         <activity
             android:name=".owner.store_manager.EditItemActivity"
@@ -49,6 +49,7 @@
             android:name=".owner.customer_orders.CustomerOrdersActivity"
             android:exported="false"
             android:label="@string/title_activity_customer_orders"
+            android:launchMode="singleTask"
             android:parentActivityName=".owner.store_manager.StoreManagerActivity" />
         <activity
             android:name=".owner.OwnerHomeActivity"

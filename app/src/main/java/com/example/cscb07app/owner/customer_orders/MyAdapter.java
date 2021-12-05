@@ -59,22 +59,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Orders").child(orderIds.get(position)).child("completed");
-                ref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if ((Boolean)snapshot.getValue(Boolean.class)){
-                            ref.setValue(false);
-                        }
-                        else if (!(Boolean)snapshot.getValue(Boolean.class)){
-                            ref.setValue(true);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                ref.setValue(!Boolean.parseBoolean(completed.get(position)));
             }
         });
     }
