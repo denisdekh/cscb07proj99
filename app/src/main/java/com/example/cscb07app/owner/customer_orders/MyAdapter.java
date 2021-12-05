@@ -7,6 +7,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cscb07app.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -49,6 +55,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 context.startActivity(intent);
             }
         });
+        holder.changeCompletedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Orders").child(orderIds.get(position)).child("completed");
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if ((Boolean)snapshot.getValue(Boolean.class)){
+                            ref.setValue(false);
+                        }
+                        else if (!(Boolean)snapshot.getValue(Boolean.class)){
+                            ref.setValue(true);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -59,6 +87,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView orderIdtext,customertext,completedtext,productsInfotext;
         ConstraintLayout mainLayout;
+        Button changeCompletedButton;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +96,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             completedtext = itemView.findViewById(R.id.completed);
             productsInfotext = itemView.findViewById(R.id.productsInfo1);
             mainLayout = itemView.findViewById(R.id.mainLayout);
+            changeCompletedButton = itemView.findViewById(R.id.changeCompletedStatusButton);
         }
 
     }
