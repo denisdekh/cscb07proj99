@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class CustomerSettingsActivity extends AppCompatActivity {
     }
 
     public void getInformation() {
-        String customerusername = getIntent().getStringExtra("USERNAME");
+        String customerusername = getIntent().getStringExtra(LoginModel.USERNAME);
         ref_user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -57,7 +58,7 @@ public class CustomerSettingsActivity extends AppCompatActivity {
     }
 
     public void onPasswordClick(View view) {
-        String customerusername = getIntent().getStringExtra("USERNAME");
+        String customerusername = getIntent().getStringExtra(LoginModel.USERNAME);
         Button passwordTextField = findViewById(R.id.displayCustomerPassword);
         if (!passwordShow) {
             passwordShow = true;
