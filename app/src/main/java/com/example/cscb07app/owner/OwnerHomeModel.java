@@ -15,6 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**Model of OwnerHomeActivity, responsible for retrieving account information and creating new store.
+ * on the database.*/
+
 public class OwnerHomeModel implements OwnerHomeContract.Model{
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
