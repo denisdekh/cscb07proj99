@@ -1,6 +1,7 @@
 package com.example.cscb07app.customer.viewOrders;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,17 +48,21 @@ public class ViewOrdersAdapter extends RecyclerView.Adapter<ViewOrdersAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.my_row, parent,false);
+        //LayoutInflater inflater = LayoutInflater.from(context);
+        //View view = inflater.inflate(R.layout.my_row, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.customer_orders_row, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.idView.setText(orderIds.get(position));
-        holder.storeView.setText(storeNames.get(position));
-        holder.statusView.setText(orderStatuses.get(position));
-        holder.priceView.setText(totalPrices.get(position));
+        //Log.i("demo", ""+orderIds.get(position));
+
+
+        holder.idView.setText(orderIds.get(position).toString());
+        holder.storeView.setText(storeNames.get(position).toString());
+        holder.statusView.setText(orderStatuses.get(position).toString());
+        holder.priceView.setText(totalPrices.get(position).toString());
     }
 
     @Override

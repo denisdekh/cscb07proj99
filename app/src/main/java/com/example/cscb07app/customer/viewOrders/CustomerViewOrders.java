@@ -47,10 +47,6 @@ public class CustomerViewOrders extends AppCompatActivity {
         orderStatuses = new ArrayList<>();
 
         populateLists(username);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        ViewOrdersAdapter adapter = new ViewOrdersAdapter(orderIds, storeNames, totalPrices, orderStatuses, this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void populateLists(String username){
@@ -61,7 +57,7 @@ public class CustomerViewOrders extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot child: snapshot.child("Account").child("Customer").child(username).child("orders").getChildren()){
-                    String orderId = child.getValue().toString();
+                    String orderId = child.getKey().toString();
                     String storeId = snapshot.child("Orders").child(orderId).child("storeId").getValue().toString();
 
                     //set the parameters for a new order that we will add to the list of the orders at the specified position
@@ -77,7 +73,7 @@ public class CustomerViewOrders extends AppCompatActivity {
                     insertLists(orderId, storeName, totalPrice, orderStatus);
 
                 }
-
+                setRecyclerAdapter();
             }
 
             @Override
@@ -99,19 +95,19 @@ public class CustomerViewOrders extends AppCompatActivity {
         if(orderIds.size() == 0){
             orderIds.add(id);
             storeNames.add(store);
-            totalPrices.add(price);
+            totalPrices.add("$"+price);
             orderStatuses.add(status);
         }
         else if(orderIds.size() == 1){
             if(Integer.parseInt(orderIds.get(0).substring(1)) > orderNumber){
                 orderIds.add(id);
                 storeNames.add(store);
-                totalPrices.add(price);
+                totalPrices.add("$"+price);
                 orderStatuses.add(status);
             } else {
                 orderIds.add(0, id);
                 storeNames.add(0, store);
-                totalPrices.add(0, price);
+                totalPrices.add(0, "$"+price);
                 orderStatuses.add(0, status);
             }
         }
@@ -119,24 +115,31 @@ public class CustomerViewOrders extends AppCompatActivity {
             if(Integer.parseInt(orderIds.get(0).substring(1)) < orderNumber){ //if the id number is higher than every other one, it is the newest in the system -> attach to start
                 orderIds.add(0, id);
                 storeNames.add(0, store);
-                totalPrices.add(0, price);
+                totalPrices.add(0, "$"+price);
                 orderStatuses.add(0, status);
             } else if(Integer.parseInt(orderIds.get(orderIds.size()-1).substring(1)) > orderNumber){ //the id at the end of the array is smaller -> oldest -> attach to end
                 orderIds.add(id);
                 storeNames.add(store);
-                totalPrices.add(price);
+                totalPrices.add("$"+price);
                 orderStatuses.add(status);
             } else {
                 for (int i = 0; i < orderIds.size() - 1; i++) { //comparing up to size - 1 gives all the characters while avoiding null pointer
                     if (Integer.parseInt(orderIds.get(i).substring(1)) > orderNumber && Integer.parseInt(orderIds.get(i+1).substring(1)) < orderNumber) {
                         orderIds.add(i+1, id);
                         storeNames.add(i+1, store);
-                        totalPrices.add(i+1, price);
+                        totalPrices.add(i+1, "$" + price);
                         orderStatuses.add(i+1, status);
                         break;
                     }
                 }
             }
         }
+    }
+
+    public void setRecyclerAdapter(){
+        recyclerView = findViewById(R.id.recyclerView);
+        ViewOrdersAdapter adapter = new ViewOrdersAdapter(orderIds, storeNames, totalPrices, orderStatuses, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

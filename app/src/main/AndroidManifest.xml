@@ -80,6 +80,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".customer.CustomerHomeActivity" />
         </activity>
+        <activity
+            android:name=".customer.viewOrders.CustomerViewOrders"
+            android:exported="true"
+            android:label = "Your Orders">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".customer.CustomerHomeActivity"/>
+        </activity>
     </application>
 
 </manifest>
