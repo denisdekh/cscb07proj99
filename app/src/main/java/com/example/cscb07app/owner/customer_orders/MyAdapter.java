@@ -3,6 +3,7 @@ package com.example.cscb07app.owner.customer_orders;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.orderIdtext.setText("Order Id: " +orderIds.get(position));
         holder.customertext.setText("Customer: "+customers.get(position));
         holder.completedtext.setText("Completed: "+completed.get(position));
+        if (Boolean.parseBoolean(completed.get(position))){
+            holder.completedtext.setTextColor(Color.GREEN);
+        }
+        else{
+            holder.completedtext.setTextColor(Color.RED);
+        }
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
