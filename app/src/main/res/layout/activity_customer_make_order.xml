@@ -10,8 +10,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="396dp"
-        android:layout_height="852dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#AB50B196"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
