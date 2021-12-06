@@ -5,6 +5,7 @@
     android:id="@+id/customerOrdersRecycleView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#AB50B196"
     android:scrollbars="vertical"
     tools:context=".owner.customer_orders.CustomerOrdersActivity">
 

@@ -4,27 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_gradient_background"
+    android:background="#AB50B196"
     tools:context=".customer.CustomerSettingsActivity">
 
     <Button
         android:id="@+id/displayCustomerPassword"
         android:layout_width="375dp"
-        android:layout_height="43dp"
+        android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:background="?android:attr/selectableItemBackground"
-        android:gravity="center"
-        android:onClick="onPasswordClick"
-        android:hint="@string/censoredPassword"
-        android:text="Click here to display"
         android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:hint="@string/censoredPassword"
+        android:onClick="onPasswordClick"
+        android:text="Click here to display"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customerPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/customerPassword"
+        app:layout_constraintVertical_bias="0.006" />
 
     <TextView
         android:id="@+id/customerPassword"
@@ -165,22 +167,10 @@
         android:layout_width="425dp"
         android:layout_height="2dp"
         android:layout_marginTop="20dp"
-        android:background="@color/white"
+        android:background="@color/black"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userInformation" />
-
-    <TableRow
-        android:layout_width="478dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/displayCustomerPassword"
-        app:layout_constraintVertical_bias="0.074" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

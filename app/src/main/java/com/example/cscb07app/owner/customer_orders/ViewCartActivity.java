@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class ViewCartActivity extends AppCompatActivity {
         textView = findViewById(R.id.cartView);
         getCartInfo();
         textView.setText(cartInfo);
+        textView.setMovementMethod(new ScrollingMovementMethod());
 
     }
 
