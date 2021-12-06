@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Store {
     // description, name, and id should be private or protected
-    public String description;
-    public String name;
-    public String id;
+    String description;
+    String name;
+    String id;
     private List<Product> items;
     private List<String> orders;
 
@@ -23,6 +23,14 @@ public class Store {
         setName(name);
         setDescription(description);
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj==null) return false;
+        if (obj.getClass() != this.getClass()) return false;
+        Store other = (Store)obj;
+        return this.getDescription().equals(other.getId());
     }
 
     public String getId(){
