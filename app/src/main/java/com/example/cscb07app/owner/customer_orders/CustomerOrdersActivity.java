@@ -58,6 +58,7 @@ public class CustomerOrdersActivity extends AppCompatActivity {
                 ArrayList<String> customers = new ArrayList<String>();
                 ArrayList<String> completed = new ArrayList<String>();
                 ArrayList<String> productInfo = new ArrayList<String>();
+                ArrayList<String> prices = new ArrayList<String>();
                 if (storeId!=null) {
                     for (DataSnapshot order : snapshot.child("Stores").child(storeId).child("orders").getChildren()) {
                         orderIds.add(order.getKey());
@@ -67,6 +68,8 @@ public class CustomerOrdersActivity extends AppCompatActivity {
                         customers.add(customer);
                         String completedString = snapshot.child("Orders").child(orderId).child("completed").getValue().toString();
                         completed.add(completedString);
+                        String price = snapshot.child("Orders").child(orderId).child("price").getValue().toString();
+                        prices.add(price);
                         String product_info_string = "CART:\n\n";
                         for (DataSnapshot product : snapshot.child("Orders").child(orderId).child("cart").getChildren()) {
                             String productId = product.getKey();
@@ -93,7 +96,7 @@ public class CustomerOrdersActivity extends AppCompatActivity {
                             product_info_string += "    Description: " + productDescription + "\n";
                         }
                         productInfo.add(product_info_string);
-                        MyAdapter myAdapter = new MyAdapter(context, orderIds, customers, completed, productInfo);
+                        MyAdapter myAdapter = new MyAdapter(context, orderIds, customers, completed, productInfo,prices);
                         recyclerView.setAdapter(myAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 

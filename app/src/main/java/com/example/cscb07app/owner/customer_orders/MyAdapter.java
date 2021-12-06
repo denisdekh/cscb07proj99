@@ -25,13 +25,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    ArrayList<String> orderIds, customers, completed,productsInfo;
+    ArrayList<String> orderIds, customers, completed,productsInfo,prices;
     Context context;
-    public MyAdapter(Context ct, ArrayList<String> orderIds, ArrayList<String> customers, ArrayList<String> completed, ArrayList<String> productsInfo){
+    public MyAdapter(Context ct, ArrayList<String> orderIds, ArrayList<String> customers, ArrayList<String> completed, ArrayList<String> productsInfo,ArrayList<String> prices){
         this.orderIds = orderIds;
         this.customers = customers;
         this.completed = completed;
         this.productsInfo = productsInfo;
+        this.prices = prices;
         context = ct;
     }
     @NonNull
@@ -48,6 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.orderIdtext.setText("Order Id: " +orderIds.get(position));
         holder.customertext.setText("Customer: "+customers.get(position));
         holder.completedtext.setText("Completed: "+completed.get(position));
+        holder.pricesText.setText("Price: " + prices.get(position));
         if (Boolean.parseBoolean(completed.get(position))){
             holder.completedtext.setTextColor(Color.GREEN);
         }
@@ -77,7 +79,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView orderIdtext,customertext,completedtext,productsInfotext;
+        TextView orderIdtext,customertext,completedtext,productsInfotext,pricesText;
         ConstraintLayout mainLayout;
         Button changeCompletedButton;
 
@@ -87,6 +89,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             customertext = itemView.findViewById(R.id.customer1);
             completedtext = itemView.findViewById(R.id.completed);
             productsInfotext = itemView.findViewById(R.id.productsInfo1);
+            pricesText = itemView.findViewById(R.id.priceTextView);
             mainLayout = itemView.findViewById(R.id.mainLayout);
             changeCompletedButton = itemView.findViewById(R.id.changeCompletedStatusButton);
         }
