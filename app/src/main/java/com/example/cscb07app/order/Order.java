@@ -3,12 +3,14 @@ package com.example.cscb07app.order;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.cscb07app.customer.Customer;
 import com.example.cscb07app.product.Product;
 import com.example.cscb07app.store.Store;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -123,11 +125,7 @@ public class Order {
         this.totalCost = totalCost;
     }
 
-    //TODO read from the database and return an integer representing the cost of the cart based on
-    //TODO the store ID and the prices of the items within the store
-
-
-    public void calcTotal(){
+    /*public void calcTotal(){
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
@@ -144,21 +142,21 @@ public class Order {
                     Log.i("demo", "Store does not exist");
                 } else {
                     //for each product id in the cart
-                    double total = 0.00;
+                    totalCost = 0.00;
                     for(String key: cart.keySet()){
                         //cost of the item in the cart multiplied by the frequency of the item in the cart
 
-                        total += Double.parseDouble(task.getResult().child("items").child(key).child("price").getValue().toString()) * cart.get(key);
+                        totalCost += Double.parseDouble(task.getResult().child("items").child(key).child("price").getValue().toString()) * cart.get(key);
                     }
-                    setTotalCost(Math.round(total * 100)/100.0);
+                    setTotalCost(Math.round(totalCost * 100)/100.0);
                 }
             }
         });
-    }
+    }*/
 
     //Generates a reference to the firebase database and sends the order to the database under
     //the the orders section, where the orderId is the key to the order
-    public void sendOrder(){
+    public void sendOrder(double price){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
         //Set the id of the order when sending it, and update the number of orders in the database
@@ -185,9 +183,13 @@ public class Order {
                     ref.child("Orders").child(newOrderId).child("orderId").setValue(getOrderId());
                     ref.child("Orders").child(newOrderId).child("storeId").setValue(getStoreId());
                     ref.child("Orders").child(newOrderId).child("completed").setValue(getCompleted());
+                    ref.child("Orders").child(newOrderId).child("price").setValue(price);
 
                     //adding the order to the stores list of orders
                     ref.child("Stores").child(storeId).child("orders").child(newOrderId).setValue("a");
+
+                    //adding the order to the customers list of orders with a junk value
+                    ref.child("Account").child("Customer").child(username).child("orders").child(newOrderId).setValue("a");
 
                     //iterate through each item in the cart adding it to firebase
                     for(String key: cart.keySet()){
@@ -210,9 +212,13 @@ public class Order {
                     ref.child("Orders").child(newOrderId).child("orderId").setValue(getOrderId());
                     ref.child("Orders").child(newOrderId).child("storeId").setValue(getStoreId());
                     ref.child("Orders").child(newOrderId).child("completed").setValue(getCompleted());
+                    ref.child("Orders").child(newOrderId).child("price").setValue(price);
 
-                    //adding the order to the stores list of orders
+                    //adding the order to the stores list of orders with a junk value
                     ref.child("Stores").child(storeId).child("orders").child(newOrderId).setValue("a");
+
+                    //adding the order to the customers list of orders with a junk value
+                    ref.child("Account").child("Customer").child(username).child("orders").child(newOrderId).setValue("a");
 
                     //iterate through each item in the cart adding it to firebase
                     for(String key: cart.keySet()){
