@@ -52,7 +52,7 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
         // Log.i("testPosition", String.valueOf(position));
         Product p = productList.get(position);
         holder.name.setText(p.getName());
-        holder.price.setText(("$"+p.getPrice()));
+        holder.price.setText((String.format("$%.2f", p.getPrice())));
         holder.description.setText(p.getDescription());
         holder.brand.setText(p.getBrand());
 
