@@ -31,10 +31,6 @@ import java.util.List;
 
 /** Activity allows Owner to edit Store information and item listing.*/
 
-/* Require a Store class to hold store information. Note that Store methods and fields may change.*/
-
-/* TODO: Fix newItemId already exists. */
-
 public class StoreManagerActivity extends AppCompatActivity implements View.OnClickListener{
 
     protected static final String EXTRA_STORE_NAME = "EXTRA_STORE_NAME";

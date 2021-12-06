@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/** Allows Owner to create and edit their items. */
+
 public class EditItemActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText itemName, itemBrand, itemPrice, itemDesc;

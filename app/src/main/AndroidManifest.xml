@@ -16,7 +16,8 @@
             android:label = "@string/title_activity_view_cart"/>
         <activity
             android:name=".owner.store_manager.EditItemActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label = "@string/title_activity_edit_item_info">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".owner.store_manager.StoreManagerActivity" />
