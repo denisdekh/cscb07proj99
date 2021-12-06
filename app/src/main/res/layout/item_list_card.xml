@@ -5,13 +5,13 @@
     android:id="@+id/ItemCardLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="4dp"
     android:background="@drawable/layout_bg"
-    android:maxHeight="140sp"
-    android:layout_marginBottom="4dp">
+    android:maxHeight="140sp">
 
     <TextView
         android:id="@+id/ItemNameTextViewCard"
-        android:layout_width="273dp"
+        android:layout_width="258dp"
         android:layout_height="29dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:clickable="true"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="20sp"
