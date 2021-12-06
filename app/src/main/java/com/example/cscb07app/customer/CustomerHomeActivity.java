@@ -144,7 +144,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
     public void getStores(Context context, LinearLayout linearLayout) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Stores");
 
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
