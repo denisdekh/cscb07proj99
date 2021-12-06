@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,10 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Activity allows Owner to edit Store information and item listing.*/
-
-/* Require a Store class to hold store information. Note that Store methods and fields may change.*/
-
-/* TODO: Fix newItemId already exists. */
 
 public class StoreManagerActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -45,7 +42,7 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
     private int lastItemIdNum;
 
     private Button editButton;
-    private TextView textViewStoreName;
+    private TextView textViewStoreName, textViewItemCount;
     private RecyclerView itemRecyclerView;
     private FloatingActionButton addItemFAB;
 
@@ -80,7 +77,7 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
                 }
                 store.setItems(tempProductList);
                 // Log.i("testCount", String.valueOf(tempProductList.size()));
-                displayStoreName();
+                displayStoreInfo();
                 setItemRecyclerAdapter();
             }
 
@@ -92,6 +89,7 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
 
         editButton = (Button)findViewById(R.id.EditStoreNameBut);
         textViewStoreName = (TextView)findViewById(R.id.TextViewStoreName);
+        textViewItemCount = (TextView)findViewById(R.id.ItemCountTextView);
         itemRecyclerView = (RecyclerView)findViewById(R.id.ItemListRecyclerView);
         addItemFAB = (FloatingActionButton)findViewById(R.id.addItemFAB);
         editButton.setOnClickListener(this);
@@ -157,11 +155,14 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
         startActivity(openActivity);
     }
 
-    private void displayStoreName(){
-        String storeName = "Unnamed Store";
+    private void displayStoreInfo(){
+        String storeNameText = "Unnamed Store";
+        String itemCountText = "Number of listings: " + String.valueOf(store.getItems().size());
         if (!(this.store.getName().equals(""))){
-            storeName = this.store.getName();
+            storeNameText = this.store.getName();
         }
-        textViewStoreName.setText(storeName);
+
+        textViewStoreName.setText(storeNameText);
+        textViewItemCount.setText(itemCountText);
     }
 }

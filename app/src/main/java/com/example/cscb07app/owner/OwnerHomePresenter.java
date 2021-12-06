@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.cscb07app.owner.customer_orders.CustomerOrdersActivity;
 import com.example.cscb07app.owner.store_manager.StoreManagerActivity;
 import com.google.firebase.database.FirebaseDatabase;
@@ -59,5 +61,10 @@ public class OwnerHomePresenter extends OwnerHomeContract.Presenter {
             startCustomerOrders.putExtra(STORE_ID_EXTRA, account.getStoreId());
             context.startActivity(startCustomerOrders);
         }
+    }
+
+    @Override
+    public void logout(AppCompatActivity context){
+        context.finish();
     }
 }

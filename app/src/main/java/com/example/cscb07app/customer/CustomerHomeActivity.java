@@ -54,6 +54,10 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 startActivity(intent2);
                 return true;
 
+            case R.id.customer_logout:
+                finish();
+                return true;
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -147,8 +151,10 @@ public class CustomerHomeActivity extends AppCompatActivity {
                     String id = child.getKey();
                     String name = child.child("name").getValue().toString();
                     String desc = child.child("description").getValue().toString();
+                    Store s = new Store(id, name, desc);
+                    Log.d("test", Integer.toString(stores.size()));
+                    if(!stores.contains(s)) addStore(id, name, desc, context, linearLayout);
 
-                    addStore(id, name, desc, context, linearLayout);
                 }
                 
             }

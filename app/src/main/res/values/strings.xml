@@ -22,7 +22,7 @@
     <string name="new_password">New Password:</string>
     <string name="change_password">Change Password</string>
     <string name="AccountInformationButtonDisplay">Account Information</string>
-    <string name="censoredPassword">Click to Display Password</string>
+    <string name="censoredPassword">Click here to display</string>
     <string name="yourinformation"> <font fg="#00000000"><u>Your Information</u></font></string>
     <string-array name="users">
         <item>Owner</item>
@@ -32,6 +32,7 @@
     <string name="title_activity_store_manager">Store Manager</string>
     <string name="title_activity_owner_home">Store Owner Menu</string>
     <string name="title_activity_edit_store_info">Edit Store Information</string>
+    <string name="title_activity_edit_item_info">Edit Item Information</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -42,6 +43,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_customer_make_order">Create an order</string>
     <string name="title_activity_customer_orders">Customer Orders</string>
+    <string name ="title_activity_view_cart">Cart</string>
 
     <!-- Strings used for customer viewing orders -->
     <string name="order_view_screen_name">Your Orders</string>

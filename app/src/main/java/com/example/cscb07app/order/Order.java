@@ -125,8 +125,10 @@ public class Order {
         this.totalCost = totalCost;
     }
 
-    //TODO fix the price calculation to be accurate to the latest button press
-    public void updateTotalCost(){
+
+    //TODO read from the database and return an integer representing the cost of the cart based on
+    //TODO the store ID and the prices of the items within the store
+    public void calcTotal(){
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 

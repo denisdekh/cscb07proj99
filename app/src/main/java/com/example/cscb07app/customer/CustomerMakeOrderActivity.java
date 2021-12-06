@@ -9,6 +9,7 @@ import com.example.cscb07app.R;
 import com.example.cscb07app.login.LoginModel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.util.Log;
@@ -35,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 public class CustomerMakeOrderActivity extends AppCompatActivity {
 
 Order order;
+TextView totalCost;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,6 +66,7 @@ Order order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_customer_make_order);
 
         Intent intent = getIntent();
         String id = intent.getStringExtra(CustomerHomeActivity.STORE_ID);
@@ -76,6 +79,14 @@ Order order;
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
         scroll.addView(content);
+        totalCost  = new TextView(this);
+        totalCost.setText("Total: $0.0");
+        totalCost.setGravity(Gravity.CENTER);
+        totalCost.setTextSize(25);
+        totalCost.setPadding(20,20,20,20);
+
+        //ConstraintLayout scrollParent = (ConstraintLayout) findViewById(R.id.scroll_parent);
+        content.addView(totalCost);
 
         order = new Order(username, id);
         getProducts(this, content, id);
@@ -88,11 +99,12 @@ Order order;
         LinearLayout name_desc = new LinearLayout(context);
         LinearLayout brand_price = new LinearLayout(context);
         LinearLayout buttons = new LinearLayout(context);
-        //LinearLayout except_buttons = new LinearLayout(context);
         TextView productName = new TextView(context);
         TextView productDesc = new TextView(context);
         TextView productBrand = new TextView(context);
         TextView productPrice = new TextView(context);
+
+        name_desc.setLayoutParams(new LinearLayout.LayoutParams(400, LinearLayout.LayoutParams.WRAP_CONTENT));
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -165,6 +177,9 @@ Order order;
                     items -= 1;
                     num.setText(Integer.toString(items));
                     order.remItem(id);
+                    double total = order.getTotalCost();
+                    order.setTotalCost(order.getTotalCost() - Double.parseDouble(price));
+                    totalCost.setText("Total: $" + Double.toString(order.getTotalCost()));
                 }
             }
         });
@@ -175,6 +190,9 @@ Order order;
                 items += 1;
                 num.setText(Integer.toString(items));
                 order.addItem(id);
+                double total = order.getTotalCost();
+                order.setTotalCost(order.getTotalCost() + Double.parseDouble(price));
+                totalCost.setText("Total: $" + Double.toString(order.getTotalCost()));
             }
         });
 

@@ -11,7 +11,7 @@ public class Owner extends User {
     }
 
     public Owner(String username, String password, String name, String email, String storeId) {
-        super(username, password, name, email);
+        super(username, password, email, name);
         setStoreId(storeId);
     }
 

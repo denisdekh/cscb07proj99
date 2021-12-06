@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
@@ -20,37 +21,178 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CustomerOrdersActivity extends AppCompatActivity {
-    ArrayList<String> orderIds,customers,productsInfo,completed;
-    ArrayList<ArrayList<String>> listproductIds,listproductFrequencys;
     private String storeId;
     String s = "";
     RecyclerView recyclerView;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        orderIds = new ArrayList<String>();
-        customers = new ArrayList<String>();
-        productsInfo = new ArrayList<String>();
-        completed = new ArrayList<String>();
-        listproductIds = new ArrayList<ArrayList<String>>();
-        listproductFrequencys= new ArrayList<ArrayList<String>>();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders);
         Intent intent = getIntent();
+        context = this;
         this.storeId = intent.getStringExtra(OwnerHomeActivity.STORE_ID_EXTRA);
         recyclerView = findViewById(R.id.customerOrdersRecyclerView);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        makeAdapter(ref);
+
         /*makeOrderIds();
         makeCustomersCompletedlistProducts();
         makeProductInfo();
         */
-        MyAdapter myAdapter = new MyAdapter(this, orderIds,customers,completed,productsInfo);
-        recyclerView.setAdapter(myAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+    void addStringtoArrayList(ArrayList<String> a ,String s){
+        a.add(s);
+    }
+
+    void makeAdapter(DatabaseReference s){
+        s.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> orderIds = new ArrayList<String>();
+                ArrayList<String> customers = new ArrayList<String>();
+                ArrayList<String> completed = new ArrayList<String>();
+                ArrayList<String> productInfo = new ArrayList<String>();
+                if (storeId!=null) {
+                    for (DataSnapshot order : snapshot.child("Stores").child(storeId).child("orders").getChildren()) {
+                        orderIds.add(order.getKey());
+                    }
+                    for (String orderId : orderIds) {
+                        String customer = snapshot.child("Orders").child(orderId).child("username").getValue().toString();
+                        customers.add(customer);
+                        String completedString = snapshot.child("Orders").child(orderId).child("completed").getValue().toString();
+                        completed.add(completedString);
+                        String product_info_string = "CART:\n\n";
+                        for (DataSnapshot product : snapshot.child("Orders").child(orderId).child("cart").getChildren()) {
+                            String productId = product.getKey();
+                            String productName = "does not exist";
+                            String productBrand = "does not exist";
+                            String productPrice = " does not exist";
+                            String productDescription = "does not exist";
+                            product_info_string += " Product Id: " + productId + " Frequency: " + product.getValue() + " \n";
+                            if (snapshot.child("Stores").child(storeId).child("items").child(productId).child("name").getValue() != null) {
+                                productName = snapshot.child("Stores").child(storeId).child("items").child(productId).child("name").getValue().toString();
+                            }
+                            if (snapshot.child("Stores").child(storeId).child("items").child(productId).child("brand").getValue() != null) {
+                                productBrand = snapshot.child("Stores").child(storeId).child("items").child(productId).child("brand").getValue().toString();
+                            }
+                            if (snapshot.child("Stores").child(storeId).child("items").child(productId).child("price").getValue() != null) {
+                                productPrice = snapshot.child("Stores").child(storeId).child("items").child(productId).child("price").getValue().toString();
+                            }
+                            if (snapshot.child("Stores").child(storeId).child("items").child(productId).child("description").getValue() != null) {
+                                productDescription = snapshot.child("Stores").child(storeId).child("items").child(productId).child("description").getValue().toString();
+                            }
+                            product_info_string += "    Name: " + productName + "\n";
+                            product_info_string += "    Brand: " + productBrand + "\n";
+                            product_info_string += "    Price : " + productPrice + "\n";
+                            product_info_string += "    Description: " + productDescription + "\n";
+                        }
+                        productInfo.add(product_info_string);
+                        MyAdapter myAdapter = new MyAdapter(context, orderIds, customers, completed, productInfo);
+                        recyclerView.setAdapter(myAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    /*void makeOrderIds(DatabaseReference s){
+        s.addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> ids = new ArrayList<String>();
+                for (DataSnapshot order: snapshot.child("orders").getChildren()){
+                    addStringtoArrayList(ids,order.getKey());
+                }
+                orderIds = ids;
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    void makeCompleted(DatabaseReference o){
+        o.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(String orderId: orderIds){
+                    String completedstring = snapshot.child(orderId).child("completed").getValue().toString();
+                    completed.add(completedstring);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    void makeCustomers(DatabaseReference o){
+        o.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(String orderId: orderIds){
+                    String customerString = snapshot.child(orderId).child("username").getValue().toString();
+                    addStringtoArrayList(customers,customerString);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    void makeProductsInfo(DatabaseReference o){
+        o.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (String orderId: orderIds){
+                    String s = "";
+                    for(DataSnapshot product: snapshot.child(orderId).child("cart").getChildren()){
+                        String productId = product.getKey();
+                        String productFrequency = product.getValue().toString();
+                        s += "Product Id: " + productId + "\n   product Frequency: " + productFrequency + "\n";
+
+                    }
+                    addStringtoArrayList(productsInfo,s);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+     */
+
     /*
+
+
 
     private void addToArrayList(ArrayList<String> a,String s){
         a.add(s);
