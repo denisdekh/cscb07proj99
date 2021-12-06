@@ -50,7 +50,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 Intent intent = getIntent();
                 username = intent.getStringExtra(LoginModel.USERNAME);
                 Intent intent2 = new Intent(this, CustomerSettingsActivity.class);
-                intent2.putExtra("USERNAME", username);
+                intent2.putExtra(LoginModel.USERNAME, username);
                 startActivity(intent2);
                 return true;
 
@@ -58,11 +58,18 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 finish();
                 return true;
 
+            case R.id.orders:
+                Intent intent1 = getIntent();
+                username = intent1.getStringExtra(LoginModel.USERNAME);
+                Intent intent3 = new Intent(this, CustomerViewOrders.class);
+                intent3.putExtra(LoginModel.USERNAME, username);
+                startActivity(intent3);
+                return true;
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
     }
 
@@ -104,16 +111,12 @@ public class CustomerHomeActivity extends AppCompatActivity {
         storeName.setGravity(Gravity.LEFT);
         storeName.setPadding(30, 30, 30, 30);
         storeName.setTypeface(null, Typeface.BOLD);
-        //storeName.setBackgroundColor(0xaaffaaff);
 
         storeDesc.setLayoutParams(params);
         storeDesc.setText(s.getDescription());
         storeDesc.setGravity(Gravity.LEFT);
         storeDesc.setPadding(30, 30, 30, 40);
-        //storeDesc.setBackgroundColor(0xaaaaffff);
 
-
-        //store.setBackgroundColor(0xffaaaaff);
         store.setOrientation(LinearLayout.VERTICAL);
         store.addView(storeName);
         store.addView(storeDesc);
@@ -163,6 +166,5 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-
     }
 }
