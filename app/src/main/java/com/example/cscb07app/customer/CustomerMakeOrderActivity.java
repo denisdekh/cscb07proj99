@@ -51,7 +51,7 @@ TextView totalCost;
             case R.id.finish_order:
                 // User chose the "finish order" item
 
-                order.sendOrder();
+                order.sendOrder(order.totalCost);
                 Toast.makeText(this, "Order successfully submitted", Toast.LENGTH_SHORT).show();
                 finish();
                 return true;
