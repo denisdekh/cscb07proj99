@@ -43,4 +43,7 @@
     <string name="title_activity_customer_make_order">Create an order</string>
     <string name="title_activity_customer_orders">Customer Orders</string>
 
+    <!-- Strings used for customer viewing orders -->
+    <string name="order_view_screen_name">Your Orders</string>
+    <string name="order_view_more_info">Tap to View Order Details</string>
 </resources>
