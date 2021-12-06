@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/** Allows Owner to create and edit their items. */
+
 public class EditItemActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText itemName, itemBrand, itemPrice, itemDesc;
@@ -98,8 +100,8 @@ public class EditItemActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this, "You cannot leave the any fields blank", Toast.LENGTH_SHORT).show();
         }
 
-        else if (!(itemPrice.getText().toString().matches("[0-9]+[\\.]?[0-9]*"))){
-            Toast.makeText(this, "You must enter a number for item price", Toast.LENGTH_SHORT).show();
+        else if (!(itemPrice.getText().toString().matches("[0-9]+[\\.]?[0-9]{0,2}"))){
+            Toast.makeText(this, "Item price must be a number with at most 2 decimal places", Toast.LENGTH_SHORT).show();
         }
         else{
             double price = Double.parseDouble(itemPrice.getText().toString());

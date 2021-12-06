@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,10 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Activity allows Owner to edit Store information and item listing.*/
-
-/* Require a Store class to hold store information. Note that Store methods and fields may change.*/
-
-/* TODO: Fix newItemId already exists. */
 
 public class StoreManagerActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -164,6 +161,7 @@ public class StoreManagerActivity extends AppCompatActivity implements View.OnCl
         if (!(this.store.getName().equals(""))){
             storeNameText = this.store.getName();
         }
+
         textViewStoreName.setText(storeNameText);
         textViewItemCount.setText(itemCountText);
     }

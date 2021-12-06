@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /** Allows Owner to update their store's name and description*/
-/*  Database field may change*/
 
 public class EditStoreInfoActivity extends AppCompatActivity {
 

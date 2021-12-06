@@ -32,6 +32,7 @@
     <string name="title_activity_store_manager">Store Manager</string>
     <string name="title_activity_owner_home">Store Owner Menu</string>
     <string name="title_activity_edit_store_info">Edit Store Information</string>
+    <string name="title_activity_edit_item_info">Edit Item Information</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
