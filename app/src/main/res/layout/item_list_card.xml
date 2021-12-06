@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/ItemNameTextViewCard"
-        android:layout_width="258dp"
+        android:layout_width="250dp"
         android:layout_height="29dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
