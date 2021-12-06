@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
+    android:background="#00FFFFFF"
     android:outlineProvider="none">
 
     <androidx.cardview.widget.CardView
@@ -15,13 +16,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:outlineProvider="none">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="189dp"
-            android:background="@drawable/layout_bg">
+            android:background="@drawable/layout_bg"
+            android:outlineProvider="none">
 
             <TextView
                 android:id="@+id/orderId1"
@@ -86,9 +89,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
+                android:text="Price"
                 android:textColor="#FF5722"
                 android:textSize="16sp"
-                android:text="Price"
                 app:layout_constraintBottom_toTopOf="@+id/productsInfo1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
