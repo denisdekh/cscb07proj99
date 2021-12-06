@@ -6,10 +6,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cscb07app.login.LoginActivity;
 import com.example.cscb07app.owner.customer_orders.CustomerOrdersActivity;
 import com.example.cscb07app.owner.store_manager.StoreManagerActivity;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**Presenter for OwnerHomeAcitivity, responsible for redirecting to child activities and logging out.*/
 public class OwnerHomePresenter extends OwnerHomeContract.Presenter {
 
     final String STORE_ID_EXTRA = "STORE_ID_EXTRA";
@@ -65,6 +67,8 @@ public class OwnerHomePresenter extends OwnerHomeContract.Presenter {
 
     @Override
     public void logout(AppCompatActivity context){
+        Intent loginScreen = new Intent(context, LoginActivity.class);
+        context.startActivity(loginScreen);
         context.finish();
     }
 }
