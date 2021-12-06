@@ -179,7 +179,7 @@ TextView totalCost;
                     order.remItem(id);
                     double total = order.getTotalCost();
                     order.setTotalCost(order.getTotalCost() - Double.parseDouble(price));
-                    totalCost.setText("Total: $" + Double.toString(order.getTotalCost()));
+                    totalCost.setText("Total: $" + Double.toString(Math.round(order.getTotalCost()*100.0)/100.0) );
                 }
             }
         });
@@ -192,7 +192,7 @@ TextView totalCost;
                 order.addItem(id);
                 double total = order.getTotalCost();
                 order.setTotalCost(order.getTotalCost() + Double.parseDouble(price));
-                totalCost.setText("Total: $" + Double.toString(order.getTotalCost()));
+                totalCost.setText("Total: $" + Double.toString(Math.round(order.getTotalCost()*100.0)/100.0));
             }
         });
 
